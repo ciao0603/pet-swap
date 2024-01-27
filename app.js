@@ -15,7 +15,7 @@ require('./config/mongoose')
 require('./models')
 
 // 設定模板引擎
-app.engine('hbs', exphbs({ extname: '.hbs'}))
+app.engine('hbs', exphbs({ extname: '.hbs' }))
 app.set('view engine', 'hbs')
 
 // 中間件
