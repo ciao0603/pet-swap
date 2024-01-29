@@ -28,6 +28,10 @@ const userController = {
     } catch (err) {
       next(err)
     }
+  },
+  // 渲染登入頁面
+  loginPage: (req, res, next) => {
+    res.render('login')
   }
 }
 module.exports = userController

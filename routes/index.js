@@ -4,8 +4,13 @@ const router = express.Router()
 const userController = require('../controllers/user-controller')
 const { errorHandler } = require('../middlewares/error-handler')
 
-router.get('/register', userController.RegisterPage)
-router.post('/register', userController.Register)
+// 註冊
+router.route('/register')
+  .get(userController.RegisterPage)
+  .post(userController.Register)
+// 登入
+router.route('/login')
+  .get(userController.loginPage)
 
 router.use('/', errorHandler)
 
