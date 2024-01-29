@@ -37,6 +37,14 @@ const userController = {
   login: (req, res, next) => {
     req.flash('success_msg', '登入成功!')
     res.redirect('/products')
+  },
+  // 登出
+  logout: (req, res, next) => {
+    req.logout(err => {
+      if (err) return next(err)
+    })
+    req.flash('success_msg', '登出成功!')
+    res.redirect('/login')
   }
 }
 module.exports = userController
