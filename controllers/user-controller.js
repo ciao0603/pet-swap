@@ -32,6 +32,11 @@ const userController = {
   // 渲染登入頁面
   loginPage: (req, res, next) => {
     res.render('login')
+  },
+  // 驗證user資料後登入
+  login: (req, res, next) => {
+    req.flash('success_msg', '登入成功!')
+    res.redirect('/products')
   }
 }
 module.exports = userController
