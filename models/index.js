@@ -40,7 +40,7 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize
 db.Sequelize = Sequelize
 
-sequelize.sync()
+sequelize.authenticate()
   .then(() => { console.log('MySQL connected !') })
   .catch(err => { console.log('MySQL connect error :', err) })
 
