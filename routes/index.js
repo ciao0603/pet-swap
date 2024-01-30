@@ -16,6 +16,13 @@ router.route('/login')
 // 登出
 router.get('/logout', userController.logout)
 
+router.get('/products', (req, res) => {
+  res.render('index')
+})
+router.get('/', (req, res) => {
+  res.redirect('/products')
+})
+
 router.use('/', errorHandler)
 
 module.exports = router
