@@ -6,6 +6,7 @@ const passport = require('../config/passport')
 const { errorHandler } = require('../middlewares/error-handler')
 const { userAuthenticated } = require('../middlewares/auth')
 
+// * 登入系統
 // 註冊
 router.route('/register')
   .get(userController.RegisterPage)
@@ -16,14 +17,19 @@ router.route('/login')
   .post(passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }), userController.login)
 // 登出
 router.get('/logout', userController.logout)
+
+// * 使用者基本功能
+router.route('/users/:userId')
+  .all(userAuthenticated)
+  .get(userController.getUser)
 // 首頁
 router.get('/products', userAuthenticated, (req, res) => {
   res.render('index')
 })
+
 router.get('/', (req, res) => {
   res.redirect('/products')
 })
-
 router.use('/', errorHandler)
 
 module.exports = router

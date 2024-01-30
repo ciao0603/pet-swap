@@ -45,6 +45,9 @@ const userController = {
     })
     req.flash('success_msg', '登出成功!')
     res.redirect('/login')
+  },
+  getUser: (req, res, next) => {
+    res.render('user')
   }
 }
 module.exports = userController
