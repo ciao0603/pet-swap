@@ -1,15 +1,54 @@
 <header>
-  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-    <div class="container-fluid d-flex justify-content-between">
-      <div>
+  <nav class="navbar navbar-expand-lg bg-primary" style="background-color: #e3f2fd;">
+    <div class="container-fluid row">
+      <div class="col-4">
         <a class="navbar-brand" href="/" style="text-decoration: none; color: black;">
           <i class="fa-solid fa-paw fa-lg" style="color: #ac610c;"></i>
-          <strong style="font-size: 24px;">Pet Swap</strong>
-        </a>
+          <strong style="font-size: 24px;">Pet Swap</strong></a>
       </div>
-      <div>
-        <a href="/register" class="mx-1"><button class="btn btn-info btn-sm">Register</button></a>
-        <a href="/login" class="mx-1"><button class="btn btn-info btn-sm">Login</button></a>
+      <button class="navbar-toggler m-2 " type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse col-8" id="navbarSupportedContent">
+        <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+          {{#if user}}
+          {{!-- 登入後 --}}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle fw-bold" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              {{user.name}}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              {{#if user.isAdmin}}
+              {{!-- 管理這帳號 --}}
+              <li><a class="dropdown-item" href="/admin/users">帳號管理</a></li>
+              <li><a class="dropdown-item" href="/admin/shops">商店管理</a></li>
+              <li><a class="dropdown-item" href="/admin/categories">類別管理</a></li>
+              {{else}}
+              {{!-- 普通帳號 --}}
+              <li><a class="dropdown-item" href="/users/:userId">個人訊息</a></li>
+              {{!-- 若該帳號有成立商店 --}}
+              {{#if user.shopId}}<li><a class="dropdown-item" href="/shops/:shopId">我的商店</a></li>{{/if}}
+              <li><a class="dropdown-item" href="/users/:userId/orders">歷史訂單</a></li>
+              {{/if}}
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="/logout">Logout</a></li>
+            </ul>
+          </li>
+          {{else}}
+          {{!-- 登入前 --}}
+          <li class="nav-item">
+            <a class="nav-link" href="/register">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+          {{/if}}
+        </ul>
       </div>
     </div>
   </nav>

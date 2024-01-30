@@ -28,6 +28,23 @@ const userController = {
     } catch (err) {
       next(err)
     }
+  },
+  // 渲染登入頁面
+  loginPage: (req, res, next) => {
+    res.render('login')
+  },
+  // 驗證user資料後登入
+  login: (req, res, next) => {
+    req.flash('success_msg', '登入成功!')
+    res.redirect('/products')
+  },
+  // 登出
+  logout: (req, res, next) => {
+    req.logout(err => {
+      if (err) return next(err)
+    })
+    req.flash('success_msg', '登出成功!')
+    res.redirect('/login')
   }
 }
 module.exports = userController
