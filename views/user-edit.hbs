@@ -1,0 +1,36 @@
+<div class="mb-4">
+  <h1 class="h3 font-weight-normal mb-3 fw-bold">個人資料修改</h1>
+</div>
+<form action="/users/{{user.id}}?_method=PUT" method="POST" enctype="multipart/form-data">
+  {{!-- image --}}
+  <div class="form-row mb-3 d-flex">
+    <label class="form-label my-auto me-2" style="word-break: keep-all;" for="image">更換頭像</label>
+    <input class="form-control" type="file" class="form-control-file" id="image" name="image">
+  </div>
+  {{!-- name --}}
+  <div class="form-row mb-3 d-flex">
+    <label class="form-label my-auto me-2" style="word-break: keep-all;" for="name">姓名</label>
+    <input class="form-control" id="name" type="text" name="name" class="form-control" placeholder="{{user.name}}">
+  </div>
+  {{!-- email --}}
+  <div class="form-row mb-3 d-flex">
+    <label class="form-label my-auto me-2" style="word-break: keep-all;" for="email">信箱</label>
+    <input class="form-control" id="email" type="text" name="email" class="form-control" placeholder="{{user.email}}">
+  </div>
+  {{!-- password --}}
+  <div class="form-row mb-3 d-flex">
+    <label class="form-label my-auto me-2" style="word-break: keep-all;" for="password">新密碼</label>
+    <input class="form-control" id="password" type="password" name="password" class="form-control"
+      placeholder="New password">
+  </div>
+  {{!-- password check --}}
+  <div class="form-row mb-3 d-flex">
+    <label class="form-label my-auto me-2" style="word-break: keep-all;" for="passwordCheck">確認密碼</label>
+    <input class="form-control" id="passwordCheck" type="password" name="passwordCheck" class="form-control"
+      placeholder="Password Check">
+  </div>
+  {{!-- submit button --}}
+  <div>
+    <button class="btn btn-outline-success btn-block" type="submit">確認修改</button>
+  </div>
+</form>

@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
 const flash = require('connect-flash')
 const session = require('express-session')
+const path = require('path')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -25,6 +26,7 @@ app.set('view engine', 'hbs')
 // 中間件
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
+app.use('/upload', express.static(path.join(__dirname, 'upload')))
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,

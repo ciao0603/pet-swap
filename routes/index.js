@@ -4,7 +4,10 @@ const router = express.Router()
 const userController = require('../controllers/user-controller')
 const passport = require('../config/passport')
 const { errorHandler } = require('../middlewares/error-handler')
+const { userAuthenticated } = require('../middlewares/auth')
+const upload = require('../middlewares/multer')
 
+// * 登入系統
 // 註冊
 router.route('/register')
   .get(userController.RegisterPage)
@@ -16,13 +19,22 @@ router.route('/login')
 // 登出
 router.get('/logout', userController.logout)
 
-router.get('/products', (req, res) => {
+// * 使用者基本功能
+// 頁面渲染
+router.get('/users/:userId/edit', userAuthenticated, userController.userEditPage)
+// 使用者資料
+router.route('/users/:userId')
+  .all(userAuthenticated)
+  .get(userController.getUser)
+  .put(upload.single('image'), userController.putUser)
+// 首頁
+router.get('/products', userAuthenticated, (req, res) => {
   res.render('index')
 })
+
 router.get('/', (req, res) => {
   res.redirect('/products')
 })
-
 router.use('/', errorHandler)
 
 module.exports = router
