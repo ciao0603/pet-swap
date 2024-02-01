@@ -60,7 +60,7 @@ const userController = {
     try {
       const originalData = req.user
       const userId = originalData.id
-      const image = req.file
+      const image = req.file || ''
       const { name, email, password, passwordCheck } = req.body || ''
       const newData = { image, name, email, password }
       // 錯誤排除
