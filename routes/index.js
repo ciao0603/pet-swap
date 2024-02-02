@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const userController = require('../controllers/user-controller')
+const shopController = require('../controllers/shop-controller')
 const passport = require('../config/passport')
 const { errorHandler } = require('../middlewares/error-handler')
 const { userAuthenticated } = require('../middlewares/auth')
@@ -31,6 +32,12 @@ router.route('/users/:userId')
 router.get('/products', userAuthenticated, (req, res) => {
   res.render('index')
 })
+
+// * 商店功能
+// 頁面渲染
+router.get('/shops/create', userAuthenticated, shopController.shopCreatePage)
+// 創建商店
+router.post('/shops', userAuthenticated, upload.single('image'), shopController.postShop)
 
 router.get('/', (req, res) => {
   res.redirect('/products')
