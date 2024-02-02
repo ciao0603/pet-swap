@@ -5,6 +5,15 @@ const shopController = {
   shopCreatePage: (req, res, next) => {
     res.render('shop-create')
   },
+  shopEditPage: async (req, res, next) => {
+    try {
+      const { shopId } = req.params
+      const shop = await Shop.findByPk(shopId, { raw: true })
+      res.render('shop-edit', { shop })
+    } catch (err) {
+      next(err)
+    }
+  },
   postShop: async (req, res, next) => {
     try {
       const userId = req.user.id
@@ -23,6 +32,32 @@ const shopController = {
 
       req.flash('success_msg', '商店建立成功!')
       res.redirect(`/shops/${shop.id}`)
+    } catch (err) {
+      next(err)
+    }
+  },
+  getShop: async (req, res, next) => {
+    try {
+      const { shopId } = req.params
+      const shop = await Shop.findByPk(shopId, { raw: true })
+      res.render('shop', { shop })
+    } catch (err) {
+      next(err)
+    }
+  },
+  putShop: async (req, res, next) => {
+    try {
+      const { shopId } = req.params
+      const { name, introduction } = req.body
+
+      const shop = await Shop.findByPk(shopId)
+      // 若有上傳新的圖片就交給imgFileHandler處理，否則就使用shop原本的圖片
+      const image = req.file ? await imgurFileHandler(req.file) : shop.image
+      // 更新資料
+      await shop.update({ name, introduction, image })
+
+      req.flash('success_msg', '商店修改成功!')
+      res.redirect(`/shops/${shopId}`)
     } catch (err) {
       next(err)
     }

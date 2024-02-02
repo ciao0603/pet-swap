@@ -36,10 +36,16 @@ router.get('/products', userAuthenticated, (req, res) => {
 // * 商店功能
 // 頁面渲染
 router.get('/shops/create', userAuthenticated, shopController.shopCreatePage)
+router.get('/shops/:shopId/edit', userAuthenticated, shopController.shopEditPage)
 // 創建商店
 router.post('/shops', userAuthenticated, upload.single('image'), shopController.postShop)
+// 商店資料
+router.route('/shops/:shopId')
+  .all(userAuthenticated)
+  .get(shopController.getShop)
+  .put(upload.single('image'), shopController.putShop)
 
-router.get('/', (req, res) => {
+router.use('/', (req, res) => {
   res.redirect('/products')
 })
 router.use('/', errorHandler)
