@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-4 mx-auto" style="max-width: 350px;">
+    <img src="{{shop.image}}" class="img-fluid rounded-circle" style="width: 100%; aspect-ratio: 1/1;" alt="商店頭像">
+  </div>
+  <div class="col-8 mt-3 align-self-end">
+    <h2 class="fw-bold">{{shop.name}}</h2>
+    <p class="my-3">{{shop.introduction}}</p>
+    <div class="d-flex">
+      <a class="btn btn-outline-danger" href="/shops/{{shop.id}}/edit" role="button">修改商店資訊</a>
+      <a class="btn btn-outline-info mx-3" href="/shops/{{shop.id}}/orders" role="button">查看歷史訂單</a>
+    </div>
+  </div>
+</div>
+<div class="mt-5">
+  {{!-- 商品列表 --}}
+  商品
+</div>

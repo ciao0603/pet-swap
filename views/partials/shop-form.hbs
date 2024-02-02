@@ -1,0 +1,19 @@
+{{!-- name --}}
+<div class="form-row mb-3 d-flex">
+  <label class="form-label my-auto me-2" style="word-break: keep-all;" for="name">商店名稱</label>
+  <input class="form-control" id="name" type="text" name="name" placeholder="Shop Name" value="{{shop.name}}">
+</div>
+{{!-- image --}}
+<div class="form-row mb-3 d-flex">
+  <label class="form-label my-auto me-2" style="word-break: keep-all;" for="image">商店頭像</label>
+  <input class=" form-control form-control-file" type="file" id="image" name="image">
+</div>
+{{!-- introduction --}}
+<div class="form-row mb-3 d-flex">
+  <label class="form-label my-auto me-2" style="word-break: keep-all;" for="introduction">商店介紹</label>
+  <textarea class="form-control" name="introduction" id="introduction" placeholder="Shop Introduction">{{shop.introduction}}</textarea>
+</div>
+{{!-- submit button --}}
+<div>
+  <button class="btn btn-outline-success btn-block" type="submit">確認建立</button>
+</div>

@@ -14,13 +14,14 @@ const port = process.env.PORT
 const routes = require('./routes')
 const passport = require('./config/passport')
 const { getUser } = require('./helpers/auth-helper')
+const hbsHelper = require('./helpers/hbs-helper')
 
 // 確認資料庫連線狀態
 require('./config/mongoose')
 require('./models')
 
 // 設定模板引擎
-app.engine('hbs', exphbs({ extname: '.hbs' }))
+app.engine('hbs', exphbs({ extname: '.hbs', helpers: hbsHelper }))
 app.set('view engine', 'hbs')
 
 // 中間件

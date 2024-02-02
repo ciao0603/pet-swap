@@ -1,17 +1,24 @@
 <header>
   <nav class="navbar navbar-expand-lg bg-primary" style="background-color: #e3f2fd;">
     <div class="container-fluid row">
-      <div class="col-4">
+      <div class="d-flex col-6">
         <a class="navbar-brand" href="/" style="text-decoration: none; color: black;">
           <i class="fa-solid fa-paw fa-lg" style="color: #ac610c;"></i>
-          <strong style="font-size: 24px;">Pet Swap</strong></a>
+          <strong style="font-size: 24px;">Pet Swap</strong>
+        </a>
+        {{#if user}}
+        {{!-- 如果user尚未創建商店 --}}
+        {{#ifEqual user.shopId null}}
+        <a class="nav-link my-auto ms-2 fw-bold" style="color: #637a2f;word-break:keep-all" href="/shops/create">成為賣家>></a>
+        {{/ifEqual}}
+        {{/if}}
       </div>
       <button class="navbar-toggler m-2 " type="button" data-bs-toggle="collapse"
         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
         aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse col-8" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse col-6" id="navbarSupportedContent">
         <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
           {{#if user}}
           {{!-- 登入後 --}}
@@ -30,7 +37,7 @@
               {{!-- 普通帳號 --}}
               <li><a class="dropdown-item" href="/users/:userId">個人訊息</a></li>
               {{!-- 若該帳號有成立商店 --}}
-              {{#if user.shopId}}<li><a class="dropdown-item" href="/shops/:shopId">我的商店</a></li>{{/if}}
+              {{#if user.shopId}}<li><a class="dropdown-item" href="/shops/{{user.shopId}}">我的商店</a></li>{{/if}}
               <li><a class="dropdown-item" href="/users/:userId/orders">歷史訂單</a></li>
               {{/if}}
               <li>
