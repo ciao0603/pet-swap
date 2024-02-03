@@ -1,4 +1,4 @@
-const { User, Shop } = require('../models')
+const { User, Shop, Product } = require('../models')
 const { imgurFileHandler } = require('../helpers/file-helper')
 
 const shopController = {
@@ -39,8 +39,19 @@ const shopController = {
   getShop: async (req, res, next) => {
     try {
       const { shopId } = req.params
+      // 取得商店資料
       const shop = await Shop.findByPk(shopId, { raw: true })
-      res.render('shop', { shop })
+      // 取得該商店尚未售出的商品資料
+      const productList = await Product.findAll({
+        where: { shopId, buyerUserId: null },
+        raw: true
+      })
+      const data = productList.map(p => ({
+        ...p,
+        description: p.description.substring(0, 15) + '...'
+      }))
+
+      res.render('shop', { shop, products: data })
     } catch (err) {
       next(err)
     }
