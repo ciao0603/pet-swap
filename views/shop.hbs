@@ -37,7 +37,7 @@
           <div class="d-flex">
             <a href="/products/{{this.id}}/edit" class="btn btn-outline-primary mx-2">編輯</a>
             <form action="/products/{{this.id}}?_method=DELETE" method="POST">
-              <button class="btn btn-danger" type="submit"><i class="fa-regular fa-trash-can"></i></button>
+              <button class="btn btn-danger" type="submit" onclick="return confirm(`確定要刪除 {{ this.name }} 嗎？`)"><i class="fa-regular fa-trash-can"></i></button>
             </form>
           </div>
         </div>

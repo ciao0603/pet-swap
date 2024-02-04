@@ -49,8 +49,14 @@ router.route('/shops/:shopId')
 // * 商品功能
 // 頁面渲染
 router.get('/products/create', userAuthenticated, productController.productCreatePage)
+router.get('/products/:productId/edit', userAuthenticated, productController.productEditPage)
 // 新增商品
 router.post('/products', userAuthenticated, upload.single('image'), productController.postProduct)
+// 商品資料
+router.route('/products/:productId')
+  .all(userAuthenticated)
+  .put(upload.single('image'), productController.putProduct)
+  .delete(productController.deleteProduct)
 
 router.use('/', (req, res) => {
   res.redirect('/products')
