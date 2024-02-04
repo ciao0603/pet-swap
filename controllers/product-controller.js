@@ -1,5 +1,6 @@
 const { Product, Category, SubCategory, ProductCategory } = require('../models')
 const { imgurFileHandler } = require('../helpers/file-helper')
+const { getOffset, getPagination } = require('../helpers/pagination-helper')
 
 const productController = {
   productCreatePage: async (req, res, next) => {
@@ -43,6 +44,42 @@ const productController = {
       checkedCategories = checkedCategories.map(category => { return category.subCategoryId })
 
       res.render('product-edit', { product, categories: data, checkedCategories })
+    } catch (err) {
+      next(err)
+    }
+  },
+  getProducts: async (req, res, next) => {
+    try {
+      const PRODUCTS_LIMIT = 12
+      const page = Number(req.query.page) || 1
+      const limit = Number(req.query.limit) || PRODUCTS_LIMIT
+      const offset = getOffset(limit, page)
+
+      // * 取得商品分類
+      let categories = await Category.findAll({
+        raw: true
+      })
+      categories = await Promise.all(categories.map(async category => {
+        const subCategories = await SubCategory.findAll({ where: { categoryId: category.id }, raw: true })
+        return {
+          name: category.name,
+          subCategories: subCategories.map(subCategory => ({ id: subCategory.id, name: subCategory.name }))
+        }
+      }))
+      // * 取得所有未售出商品資料
+      const products = await Product.findAndCountAll({ where: { buyerUserId: null }, raw: true })
+      // 製作分頁器
+      let productList = products.rows
+      const total = products.count
+      // 切割資料
+      productList = productList.slice(offset, offset + limit)
+      // 修改資料格式
+      productList = productList.map(p => ({
+        ...p,
+        description: p.description.substring(0, 15) + '...'
+      }))
+
+      res.render('index', { categories, products: productList, pagination: getPagination(limit, page, total) })
     } catch (err) {
       next(err)
     }

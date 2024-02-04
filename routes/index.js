@@ -29,10 +29,6 @@ router.route('/users/:userId')
   .all(userAuthenticated)
   .get(userController.getUser)
   .put(upload.single('image'), userController.putUser)
-// 首頁
-router.get('/products', userAuthenticated, (req, res) => {
-  res.render('index')
-})
 
 // * 商店功能
 // 頁面渲染
@@ -50,13 +46,16 @@ router.route('/shops/:shopId')
 // 頁面渲染
 router.get('/products/create', userAuthenticated, productController.productCreatePage)
 router.get('/products/:productId/edit', userAuthenticated, productController.productEditPage)
-// 新增商品
-router.post('/products', userAuthenticated, upload.single('image'), productController.postProduct)
 // 商品資料
 router.route('/products/:productId')
   .all(userAuthenticated)
   .put(upload.single('image'), productController.putProduct)
   .delete(productController.deleteProduct)
+// 首頁 & 新增商品
+router.route('/products')
+  .all(userAuthenticated)
+  .get(productController.getProducts)
+  .post(userAuthenticated, upload.single('image'), productController.postProduct)
 
 router.use('/', (req, res) => {
   res.redirect('/products')
