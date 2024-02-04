@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate (models) {
       SubCategory.belongsTo(models.Category, { foreignKey: 'categoryId' })
+      SubCategory.hasMany(models.ProductCategory, { foreignKey: 'subCategoryId' })
     }
   }
   SubCategory.init({
@@ -19,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'SubCategory',
-    tableName: 'SubCategories',
+    tableName: 'Sub_categories',
     underscored: true
   })
   return SubCategory
