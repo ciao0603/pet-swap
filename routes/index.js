@@ -49,6 +49,7 @@ router.get('/products/:productId/edit', userAuthenticated, productController.pro
 // 商品資料
 router.route('/products/:productId')
   .all(userAuthenticated)
+  .get(productController.getProduct)
   .put(upload.single('image'), productController.putProduct)
   .delete(productController.deleteProduct)
 // 首頁 & 新增商品

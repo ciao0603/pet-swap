@@ -1,4 +1,4 @@
-const { Product, Category, SubCategory, ProductCategory } = require('../models')
+const { Shop, Product, Category, SubCategory, ProductCategory } = require('../models')
 const { imgurFileHandler } = require('../helpers/file-helper')
 const { getOffset, getPagination } = require('../helpers/pagination-helper')
 
@@ -80,6 +80,18 @@ const productController = {
       }))
 
       res.render('index', { categories, products: productList, pagination: getPagination(limit, page, total) })
+    } catch (err) {
+      next(err)
+    }
+  },
+  getProduct: async (req, res, next) => {
+    try {
+      const { productId } = req.params
+      // 取得商品
+      const product = await Product.findByPk(productId, { raw: true })
+      // 取得商店
+      const shop = await Shop.findByPk(product.shopId, { raw: true })
+      res.render('product', { product, shop })
     } catch (err) {
       next(err)
     }
