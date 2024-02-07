@@ -4,6 +4,7 @@ const router = express.Router()
 const userController = require('../controllers/user-controller')
 const shopController = require('../controllers/shop-controller')
 const productController = require('../controllers/product-controller')
+const searchController = require('../controllers/search-controller')
 const passport = require('../config/passport')
 const { errorHandler } = require('../middlewares/error-handler')
 const { userAuthenticated } = require('../middlewares/auth')
@@ -46,6 +47,8 @@ router.route('/shops/:shopId')
 // 頁面渲染
 router.get('/products/create', userAuthenticated, productController.productCreatePage)
 router.get('/products/:productId/edit', userAuthenticated, productController.productEditPage)
+// 搜尋商品
+router.get('/products/search', userAuthenticated, searchController.searchProducts)
 // 商品資料
 router.route('/products/:productId')
   .all(userAuthenticated)

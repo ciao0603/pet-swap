@@ -1,7 +1,7 @@
 {{!-- 搜尋欄 --}}
 <div>
   <form class="d-flex" action="/products/search" method="get">
-    <input class="form-control" type="search" name="keyword" placeholder="Search">
+    <input class="form-control" type="search" name="KEYWORD" placeholder="Search">
   </form>
 </div>
 {{!-- 分類表 --}}
@@ -14,7 +14,7 @@
         aria-expanded="false">{{this.name}}</a>
       <ul class="dropdown-menu dropdown-menu-dark">
         {{#each this.subCategories}}
-        <li><a class="dropdown-item" href="/products/search?categoryId={{this.id}}">{{this.name}}</a></li>
+        <li><a class="dropdown-item" href="/products/search?subCategoryId={{this.id}}">{{this.name}}</a></li>
         {{/each}}
       </ul>
     </li>
