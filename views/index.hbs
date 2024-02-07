@@ -1,1 +1,68 @@
-<h1>success</h1>
+{{!-- 搜尋欄 --}}
+<div>
+  <form class="d-flex" action="/products/search" method="get">
+    <input class="form-control" type="search" name="KEYWORD" placeholder="Search">
+  </form>
+</div>
+{{!-- 分類表 --}}
+<div class="my-3 bg-primary-subtle">
+  <ul class="nav nav-pills ps-2">
+    <div class="fw-bold my-auto">依類別尋找: </div>
+    {{#each categories}}
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle fw-bold" data-bs-toggle="dropdown" href="#" role="button"
+        aria-expanded="false">{{this.name}}</a>
+      <ul class="dropdown-menu dropdown-menu-dark">
+        {{#each this.subCategories}}
+        <li><a class="dropdown-item" href="/products/search?subCategoryId={{this.id}}">{{this.name}}</a></li>
+        {{/each}}
+      </ul>
+    </li>
+    {{/each}}
+  </ul>
+</div>
+{{!-- 商品列表 --}}
+<div class="row row-cols-4 align-items-start my-3">
+  {{!-- card --}}
+  {{#each products}}
+  <div class="col my-2">
+    <div class="card">
+      <a href="/products/{{this.id}}" style="text-decoration: none;">
+        <img src="{{this.image}}" class="card-img-top" alt="商品照片">
+        <div class="card-body">
+          <h5 class="card-title fw-bold text-dark">{{this.name}}</h5>
+          <p class="card-text mb-1">{{this.description}}</p>
+          <div class="d-flex justify-content-between">
+            <p class="card-text fw-bold m-0">{{this.status}}</p>
+            <p class=" text-dark m-0">${{this.price}}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  {{/each}}
+</div>
+{{!-- 分頁器 --}}
+<nav class="d-flex justify-content-center">
+  <ul class="pagination">
+    <li class="page-item">
+      <a class="page-link {{#ifEqual pagination.currentPage 1}} disabled {{/ifEqual}}"
+        href="/products?page={{pagination.prev}}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {{#each pagination.pages}}
+    {{#ifEqual this ../pagination.currentPage}}
+    <li class="page-item active"><a class="page-link" href="#">{{this}}</a></li>
+    {{else}}
+    <li class="page-item"><a class="page-link" href="/products?page={{this}}">{{this}}</a></li>
+    {{/ifEqual}}
+    {{/each}}
+    <li class="page-item">
+      <a class="page-link{{#ifEqual pagination.currentPage pagination.totalPage}} disabled {{/ifEqual}}"
+        href="/products?page={{pagination.next}}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>

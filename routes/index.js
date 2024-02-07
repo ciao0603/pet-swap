@@ -4,6 +4,7 @@ const router = express.Router()
 const userController = require('../controllers/user-controller')
 const shopController = require('../controllers/shop-controller')
 const productController = require('../controllers/product-controller')
+const searchController = require('../controllers/search-controller')
 const passport = require('../config/passport')
 const { errorHandler } = require('../middlewares/error-handler')
 const { userAuthenticated } = require('../middlewares/auth')
@@ -29,10 +30,6 @@ router.route('/users/:userId')
   .all(userAuthenticated)
   .get(userController.getUser)
   .put(upload.single('image'), userController.putUser)
-// 首頁
-router.get('/products', userAuthenticated, (req, res) => {
-  res.render('index')
-})
 
 // * 商店功能
 // 頁面渲染
@@ -50,13 +47,19 @@ router.route('/shops/:shopId')
 // 頁面渲染
 router.get('/products/create', userAuthenticated, productController.productCreatePage)
 router.get('/products/:productId/edit', userAuthenticated, productController.productEditPage)
-// 新增商品
-router.post('/products', userAuthenticated, upload.single('image'), productController.postProduct)
+// 搜尋商品
+router.get('/products/search', userAuthenticated, searchController.searchProducts)
 // 商品資料
 router.route('/products/:productId')
   .all(userAuthenticated)
+  .get(productController.getProduct)
   .put(upload.single('image'), productController.putProduct)
   .delete(productController.deleteProduct)
+// 首頁 & 新增商品
+router.route('/products')
+  .all(userAuthenticated)
+  .get(productController.getProducts)
+  .post(userAuthenticated, upload.single('image'), productController.postProduct)
 
 router.use('/', (req, res) => {
   res.redirect('/products')
