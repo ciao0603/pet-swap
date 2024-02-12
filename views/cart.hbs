@@ -1,0 +1,73 @@
+<div class="p-2">
+  <h2 class="fw-bold fs-4 my-2"><i class="fa-solid fa-cart-shopping"></i> {{user.name}}的購物車</h2>
+  {{!-- 購物車列表 --}}
+  <table class="table align-middle table-striped">
+    <thead class="table-primary">
+      <tr>
+        <th class="col-2 text-center" scope="col">刪除</th>
+        <th class="col-8" scope="col">商品</th>
+        <th class="col-3" scope="col">價錢</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each carts}}
+      <tr>
+        <th scope="row">
+          <form action="/users/{{../user.id}}/carts/{{this.id}}?_method=DELETE" method="POST" class="text-center">
+            <button class="btn btn-outline-danger fw-bold" type="submit"
+              onclick="return confirm(`確定要刪除 {{ this.productName }} 嗎？`)">X</button>
+          </form>
+        </th>
+        <td class="d-flex">
+          <div style="max-width: 45px;">
+            <img src="{{this.productImage}}" class="img-fluid rounded-circle" style="width:100%; aspect-ratio: 1/1;"
+              alt="商店頭像">
+          </div>
+          <p class="mx-2 my-auto">{{this.productName}}</p>
+        </td>
+        <td>$ {{this.price}}</td>
+      </tr>
+      {{/each}}
+      {{!-- 商品價格加總 --}}
+      <tr class="table-primary opacity-75 fw-bold">
+        <th></th>
+        <td></td>
+        <td>共計 {{totalPrice}} 元</td>
+      </tr>
+    </tbody>
+  </table>
+  {{!-- 收件資訊表單 --}}
+  <div class="bg-info-subtle p-3">
+    <h3 class="fw-bold fs-5 mb-3">填寫商品寄送資訊</h3>
+    <form action="/users/{{user.id}}/orders" method="POST"></form>
+    {{!-- 收件人姓名 --}}
+    <div class="form-row mb-3 d-flex">
+      <label class="form-label my-auto me-2" style="word-break: keep-all;" for="receiverName">收件人姓名</label>
+      <input class="form-control" id="receiverName" type="text" name="receiverName" placeholder="Receiver Name">
+    </div>
+    {{!-- 收件人電話 --}}
+    <div class="form-row mb-3 d-flex">
+      <label class="form-label my-auto me-2" style="word-break: keep-all;" for="receiverPhone">收件人電話</label>
+      <input class="form-control" id="receiverPhone" type="text" name="receiverPhone" placeholder="Receiver Phone">
+    </div>
+    {{!-- 收件人地址 --}}
+    <div class="form-row mb-3 d-flex">
+      <label class="form-label my-auto me-2" style="word-break: keep-all;" for="receiverAddress">收件人地址</label>
+      <input class="form-control" id="receiverAddress" type="text" name="receiverAddress"
+        placeholder="Receiver Address">
+    </div>
+    {{!-- 將後端需要的數據隱藏並回傳 --}}
+    {{!-- 購物車中所有商品的ID --}}
+    {{#each carts}}
+    <input type="text" class="visually-hidden" name="productId" value="{{this.productId}}">
+    {{/each}}
+    {{!-- totalPrice --}}
+    <input type="text" class="visually-hidden" name="totalPrice" value="{{totalPrice}}">
+    {{!-- 結帳按鈕 --}}
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info fw-bold" type="submit"
+        onclick="return confirm(`商品共計{{totalPrice}}元，確定結帳？`)">結帳</button>
+    </div>
+  </div>
+  </form>
+</div>

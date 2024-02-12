@@ -5,6 +5,7 @@ const userController = require('../controllers/user-controller')
 const shopController = require('../controllers/shop-controller')
 const productController = require('../controllers/product-controller')
 const searchController = require('../controllers/search-controller')
+const cartController = require('../controllers/cart-controller')
 const passport = require('../config/passport')
 const { errorHandler } = require('../middlewares/error-handler')
 const { userAuthenticated } = require('../middlewares/auth')
@@ -60,6 +61,12 @@ router.route('/products')
   .all(userAuthenticated)
   .get(productController.getProducts)
   .post(userAuthenticated, upload.single('image'), productController.postProduct)
+
+// * 購物車功能
+router.route('/users/:userId/carts')
+  .all(userAuthenticated)
+  .get(cartController.getCart)
+  .post(cartController.postCart)
 
 router.use('/', (req, res) => {
   res.redirect('/products')
