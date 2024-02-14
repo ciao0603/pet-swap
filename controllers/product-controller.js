@@ -1,4 +1,4 @@
-const { Shop, Product, Category, SubCategory, ProductCategory } = require('../models')
+const { Shop, Product, Category, SubCategory, ProductCategory, Cart } = require('../models')
 const { imgurFileHandler } = require('../helpers/file-helper')
 const { getOffset, getPagination } = require('../helpers/pagination-helper')
 
@@ -156,7 +156,7 @@ const productController = {
       // 已售出的商品不可刪除
       if (product.buyerUserId) throw new Error('商品已售出!')
       // 需一併刪除購物車和商品分類表中的相關紀錄
-      // await Cart.destroy({ where: { productId } })
+      await Cart.destroy({ where: { productId } })
       await ProductCategory.destroy({ where: { productId } })
       await Product.destroy({ where: { id: productId } })
       req.flash('success_msg', '商品已刪除!')
