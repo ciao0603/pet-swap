@@ -22,6 +22,10 @@ const cartController = {
     try {
       const userId = req.user.id
       const { productId } = req.body
+      // 先確認購物車中是否已存在該商品
+      const existedCart = await Cart.findOne({ where: { userId, productId } })
+      if (existedCart) throw new Error('此商品已存在您的購物車中!')
+
       const product = await Product.findByPk(productId)
       // 將商品加入使用者的購物車
       await Cart.create({
