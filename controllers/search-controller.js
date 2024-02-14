@@ -32,7 +32,7 @@ const searchController = {
         // 篩選出包含關鍵字的資料
         data = data.filter(d => d.name.toLowerCase().includes(keyword) || d.description.toLowerCase().includes(keyword))
         productList = data
-      } else {
+      } else if (KEYWORD) {
         res.redirect('back')
       }
       // * 製作分頁器
