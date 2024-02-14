@@ -20,6 +20,9 @@
       </button>
       <div class="collapse navbar-collapse col-6" id="navbarSupportedContent">
         <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/users/{{user.id}}/carts"><i class="fa-solid fa-cart-shopping"></i></a>
+          </li>
           {{#if user}}
           {{!-- 登入後 --}}
           <li class="nav-item dropdown">

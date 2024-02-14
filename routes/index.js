@@ -5,6 +5,7 @@ const userController = require('../controllers/user-controller')
 const shopController = require('../controllers/shop-controller')
 const productController = require('../controllers/product-controller')
 const searchController = require('../controllers/search-controller')
+const cartController = require('../controllers/cart-controller')
 const passport = require('../config/passport')
 const { errorHandler } = require('../middlewares/error-handler')
 const { userAuthenticated } = require('../middlewares/auth')
@@ -25,6 +26,13 @@ router.get('/logout', userController.logout)
 // * 使用者基本功能
 // 頁面渲染
 router.get('/users/:userId/edit', userAuthenticated, userController.userEditPage)
+// 購物車功能
+// 刪除購物車中的特定商品
+router.delete('/users/:userId/carts/:cartId', userAuthenticated, cartController.deleteCart)
+router.route('/users/:userId/carts')
+  .all(userAuthenticated)
+  .get(cartController.getCart) // 取得特定使用者購物車
+  .post(cartController.postCart) // 將商品添加至購物車
 // 使用者資料
 router.route('/users/:userId')
   .all(userAuthenticated)
