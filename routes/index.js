@@ -6,6 +6,7 @@ const shopController = require('../controllers/shop-controller')
 const productController = require('../controllers/product-controller')
 const searchController = require('../controllers/search-controller')
 const cartController = require('../controllers/cart-controller')
+const orderController = require('../controllers/order-controller')
 const passport = require('../config/passport')
 const { errorHandler } = require('../middlewares/error-handler')
 const { userAuthenticated } = require('../middlewares/auth')
@@ -33,6 +34,10 @@ router.route('/users/:userId/carts')
   .all(userAuthenticated)
   .get(cartController.getCart) // 取得特定使用者購物車
   .post(cartController.postCart) // 將商品添加至購物車
+// 訂單
+router.route('/users/:userId/orders')
+  .all(userAuthenticated)
+  .post(orderController.postOrder) // 結帳 > 創建訂單
 // 使用者資料
 router.route('/users/:userId')
   .all(userAuthenticated)
