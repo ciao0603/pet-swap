@@ -26,6 +26,13 @@ router.get('/logout', userController.logout)
 // * 使用者基本功能
 // 頁面渲染
 router.get('/users/:userId/edit', userAuthenticated, userController.userEditPage)
+// 購物車功能
+// 刪除購物車中的特定商品
+router.delete('/users/:userId/carts/:cartId', userAuthenticated, cartController.deleteCart)
+router.route('/users/:userId/carts')
+  .all(userAuthenticated)
+  .get(cartController.getCart) // 取得特定使用者購物車
+  .post(cartController.postCart) // 將商品添加至購物車
 // 使用者資料
 router.route('/users/:userId')
   .all(userAuthenticated)
@@ -61,12 +68,6 @@ router.route('/products')
   .all(userAuthenticated)
   .get(productController.getProducts)
   .post(userAuthenticated, upload.single('image'), productController.postProduct)
-
-// * 購物車功能
-router.route('/users/:userId/carts')
-  .all(userAuthenticated)
-  .get(cartController.getCart)
-  .post(cartController.postCart)
 
 router.use('/', (req, res) => {
   res.redirect('/products')

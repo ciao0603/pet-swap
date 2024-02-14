@@ -37,6 +37,19 @@ const cartController = {
     } catch (err) {
       next(err)
     }
+  },
+  deleteCart: async (req, res, next) => {
+    try {
+      const { userId, cartId } = req.params
+      // 刪除購物車中的紀錄(需確認為該使用者的紀錄才可刪除)
+      const deletedCart = await Cart.destroy({ where: { id: cartId, userId } })
+      if (!deletedCart) throw new Error('刪除失敗!')
+
+      req.flash('success_msg', '商品已從購物車中移除!')
+      res.redirect('back')
+    } catch (err) {
+      next(err)
+    }
   }
 }
 
