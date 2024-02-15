@@ -37,6 +37,7 @@ router.route('/users/:userId/carts')
 // 訂單
 router.route('/users/:userId/orders')
   .all(userAuthenticated)
+  .get(orderController.getUserOrders) // 取得特定使用者的歷史訂單
   .post(orderController.postOrder) // 結帳 > 創建訂單
 // 使用者資料
 router.route('/users/:userId')

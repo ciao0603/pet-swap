@@ -1,3 +1,5 @@
+const dayjs = require('dayjs')
+
 const { Product, Order, OrderItem, Cart } = require('../models')
 
 const orderController = {
@@ -25,6 +27,33 @@ const orderController = {
 
       req.flash('success_msg', '下單成功!')
       res.redirect('/products')
+    } catch (err) {
+      next(err)
+    }
+  },
+  // 取得特定使用者的歷史訂單
+  getUserOrders: async (req, res, next) => {
+    try {
+      const { userId } = req.params
+      // 取得屬於該此用者的所有訂單
+      const orders = await Order.findAll({ where: { userId }, raw: true })
+      // 整理資料
+      const data = await Promise.all(orders.map(async order => {
+        // 取得每筆訂單的商品詳情
+        const items = await OrderItem.findAll({
+          where: { orderId: order.id },
+          include: Product,
+          nest: true,
+          raw: true
+        })
+        return {
+          ...order,
+          createdAt: dayjs(order.createdAt).format('YYYY-MM-DD'),
+          items: items.map(i => i.Product)
+        }
+      }))
+
+      res.render('user-order', { orders: data })
     } catch (err) {
       next(err)
     }

@@ -41,7 +41,7 @@
               <li><a class="dropdown-item" href="/users/:userId">個人訊息</a></li>
               {{!-- 若該帳號有成立商店 --}}
               {{#if user.shopId}}<li><a class="dropdown-item" href="/shops/{{user.shopId}}">我的商店</a></li>{{/if}}
-              <li><a class="dropdown-item" href="/users/:userId/orders">歷史訂單</a></li>
+              <li><a class="dropdown-item" href="/users/{{user.id}}/orders">歷史訂單</a></li>
               {{/if}}
               <li>
                 <hr class="dropdown-divider">
