@@ -1,4 +1,5 @@
 const dayjs = require('dayjs')
+const { Op } = require('sequelize')
 
 const { Product, Order, OrderItem, Cart } = require('../models')
 
@@ -54,6 +55,33 @@ const orderController = {
       }))
 
       res.render('user-order', { orders: data })
+    } catch (err) {
+      next(err)
+    }
+  },
+  // 取得特定商店的歷史訂單
+  getShopOrders: async (req, res, next) => {
+    try {
+      const { shopId } = req.params
+      // 取得該商店已售出的商品
+      const productList = await Product.findAll({ where: { shopId, buyerUserId: { [Op.not]: null } }, raw: true })
+      // 加上每個商品的寄送資訊
+      const data = await Promise.all(productList.map(async p => {
+        const orderInfo = await OrderItem.findOne({
+          where: { productId: p.id },
+          include: [Order],
+          nest: true,
+          raw: true
+        })
+        return {
+          ...p,
+          receiverName: orderInfo.Order.receiverName,
+          receiverPhone: orderInfo.Order.receiverPhone,
+          receiverAddress: orderInfo.Order.receiverAddress
+        }
+      }))
+
+      res.render('shop-order', { products: data })
     } catch (err) {
       next(err)
     }

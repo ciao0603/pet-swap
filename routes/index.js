@@ -51,6 +51,8 @@ router.get('/shops/create', userAuthenticated, shopController.shopCreatePage)
 router.get('/shops/:shopId/edit', userAuthenticated, shopController.shopEditPage)
 // 創建商店
 router.post('/shops', userAuthenticated, upload.single('image'), shopController.postShop)
+// 取得特定商店的歷史訂單
+router.get('/shops/:shopId/orders', userAuthenticated, orderController.getShopOrders)
 // 商店資料
 router.route('/shops/:shopId')
   .all(userAuthenticated)
