@@ -6,6 +6,7 @@ const shopController = require('../controllers/shop-controller')
 const productController = require('../controllers/product-controller')
 const searchController = require('../controllers/search-controller')
 const cartController = require('../controllers/cart-controller')
+const orderController = require('../controllers/order-controller')
 const passport = require('../config/passport')
 const { errorHandler } = require('../middlewares/error-handler')
 const { userAuthenticated } = require('../middlewares/auth')
@@ -33,6 +34,11 @@ router.route('/users/:userId/carts')
   .all(userAuthenticated)
   .get(cartController.getCart) // 取得特定使用者購物車
   .post(cartController.postCart) // 將商品添加至購物車
+// 訂單
+router.route('/users/:userId/orders')
+  .all(userAuthenticated)
+  .get(orderController.getUserOrders) // 取得特定使用者的歷史訂單
+  .post(orderController.postOrder) // 結帳 > 創建訂單
 // 使用者資料
 router.route('/users/:userId')
   .all(userAuthenticated)
@@ -45,6 +51,8 @@ router.get('/shops/create', userAuthenticated, shopController.shopCreatePage)
 router.get('/shops/:shopId/edit', userAuthenticated, shopController.shopEditPage)
 // 創建商店
 router.post('/shops', userAuthenticated, upload.single('image'), shopController.postShop)
+// 取得特定商店的歷史訂單
+router.get('/shops/:shopId/orders', userAuthenticated, orderController.getShopOrders)
 // 商店資料
 router.route('/shops/:shopId')
   .all(userAuthenticated)
