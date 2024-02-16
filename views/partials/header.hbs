@@ -9,7 +9,8 @@
         {{#if user}}
         {{!-- 如果user尚未創建商店 --}}
         {{#ifEqual user.shopId null}}
-        <a class="nav-link my-auto ms-2 fw-bold" style="color: #637a2f;word-break:keep-all" href="/shops/create">成為賣家>></a>
+        <a class="nav-link my-auto ms-2 fw-bold" style="color: #637a2f;word-break:keep-all"
+          href="/shops/create">成為賣家&raquo;</a>
         {{/ifEqual}}
         {{/if}}
       </div>
@@ -20,11 +21,13 @@
       </button>
       <div class="collapse navbar-collapse col-6" id="navbarSupportedContent">
         <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+          {{#if user}}
+          {{!-- 登入後 --}}
+          {{!-- 購物車 --}}
           <li class="nav-item">
             <a class="nav-link" href="/users/{{user.id}}/carts"><i class="fa-solid fa-cart-shopping"></i></a>
           </li>
-          {{#if user}}
-          {{!-- 登入後 --}}
+          {{!-- 下拉清單 --}}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle fw-bold" href="#" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">
@@ -38,7 +41,7 @@
               <li><a class="dropdown-item" href="/admin/categories">類別管理</a></li>
               {{else}}
               {{!-- 普通帳號 --}}
-              <li><a class="dropdown-item" href="/users/:userId">個人訊息</a></li>
+              <li><a class="dropdown-item" href="/users/{{user.id}}">個人訊息</a></li>
               {{!-- 若該帳號有成立商店 --}}
               {{#if user.shopId}}<li><a class="dropdown-item" href="/shops/{{user.shopId}}">我的商店</a></li>{{/if}}
               <li><a class="dropdown-item" href="/users/{{user.id}}/orders">歷史訂單</a></li>
