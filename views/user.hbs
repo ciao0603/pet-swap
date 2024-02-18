@@ -1,4 +1,5 @@
 <div class="row">
+  {{!-- 個人資訊 --}}
   <div class="col-5">
     <div class="me-2 ">
       <div class="mx-auto" style="max-width: 350px;">
@@ -11,6 +12,72 @@
       </div>
     </div>
   </div>
+  {{!-- 尚未評價過的商品 --}}
   <div class="col-7">
-    {{!-- 尚未評價過的商品 --}}
+    <h2 class="fw-bold fs-4">尚未評價的商品</h2>
+    <hr>
+    <div>
+      {{!-- 商品列表 --}}
+      {{#each products}}
+      <div class="d-flex justify-content-between border p-2">
+        <div style="max-width: 45px;">
+          <img src="{{this.image}}" class="img-fluid rounded-circle" style="width:100%; aspect-ratio: 1/1;" alt="商店頭像">
+        </div>
+        <p class="mx-2 my-auto">{{this.name}}</p>
+        <p class="mx-2 my-auto">$ {{this.price}}</p>
+        <div class="col-2 my-auto">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#writeComment-{{this.id}}">
+            評價商品
+          </button>
+          <div class="modal fade" id="writeComment-{{this.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5 fw-bold" id="staticBackdropLabel">為商品寫下評價吧 !</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="/products/{{this.id}}/comments" method="POST">
+                    {{!-- 填寫評價 --}}
+                    <div class="d-flex mb-3 justify-content-center">
+                      <div class="form-floating my-auto">
+                        <input type="number" step="0.1" min="0" max="5" class="form-control fw-bold" id="score"
+                          name="score" required>
+                        <label for="score">分數</label>
+                      </div>
+                      <div class="form-floating mx-3 my-auto">
+                        <textarea class="form-control  fw-bold" id="comment" name="comment"></textarea>
+                        <label for="comment">評論</label>
+                      </div>
+                      <div class="my-auto">
+                        <button type="submit" class="btn btn-primary">送出</button>
+                      </div>
+                    </div>
+                  </form>
+                  {{!-- 商品資訊 --}}
+                  <h5 class="text-start fw-bold fs-6">商品資訊</h5>
+                  <hr class="my-2">
+                  <div class="d-flex">
+                    <div style="max-width: 40%;">
+                      <img src="{{this.image}}" class="img-fluid" style="width:100%; aspect-ratio: 1/1;" alt="商店頭像">
+                    </div>
+                    <div class="text-start mx-2 align-self-end">
+                      <p class="fs-5 fw-bold">{{this.name}}</p>
+                      <p class="text-wrap">{{this.description}}</p>
+                      <div class="d-flex fw-bold">
+                        <p class="me-2 mb-0">{{this.status}}</p>
+                        <p class="mb-0">$ {{this.price}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
   </div>
+</div>
