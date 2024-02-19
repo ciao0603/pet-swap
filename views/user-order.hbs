@@ -26,20 +26,31 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="orderItemsLabel">訂單編號: {{this.id}}</h1>
+                  <h3 class="modal-title fs-5" id="orderItemsLabel">訂單編號: {{this.id}}</h3>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   {{!-- 商品列表 --}}
                   <div class="mb-3">
                     {{#each this.items}}
-                    <div class="d-flex justify-content-between border p-2">
-                      <div style="max-width: 45px;">
-                        <img src="{{this.image}}" class="img-fluid rounded-circle"
-                          style="width:100%; aspect-ratio: 1/1;" alt="商店頭像">
+                    <div class="border">
+                      {{!-- 商品 --}}
+                      <div class="d-flex justify-content-between p-2">
+                        <div style="max-width: 45px;">
+                          <img src="{{this.image}}" class="img-fluid rounded-circle"
+                            style="width:100%; aspect-ratio: 1/1;" alt="商店頭像">
+                        </div>
+                        <p class="mx-2 my-auto">{{this.name}}</p>
+                        <p class="mx-2 my-auto">$ {{this.price}}</p>
                       </div>
-                      <p class="mx-2 my-auto">{{this.name}}</p>
-                      <p class="mx-2 my-auto">$ {{this.price}}</p>
+                      {{!-- 評價 --}}
+                      {{#if this.userComment}}
+                      <div class="d-flex justify-content-start p-1 align-items-center">
+                        <h4 class="fs-6 mb-0">您的評價:</h4>
+                        <p class="mx-2 fw-bold mb-0"><i class="fa-solid fa-star" style="color: #FFD43B;"></i>{{this.userComment.score}}</p>
+                        <p class="mb-0">{{this.userComment.comment}}</p>
+                      </div>
+                      {{/if}}
                     </div>
                     {{/each}}
                   </div>

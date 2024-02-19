@@ -2,6 +2,7 @@ const dayjs = require('dayjs')
 const { Op } = require('sequelize')
 
 const { Product, Order, OrderItem, Cart } = require('../models')
+const Comment = require('../models/comment')
 
 const orderController = {
   // 結帳 > 創建訂單
@@ -41,16 +42,28 @@ const orderController = {
       // 整理資料
       const data = await Promise.all(orders.map(async order => {
         // 取得每筆訂單的商品詳情
-        const items = await OrderItem.findAll({
+        let items = await OrderItem.findAll({
           where: { orderId: order.id },
           include: Product,
           nest: true,
           raw: true
         })
+        // 若是商品已被評價，需加入該筆評價資料
+        items = await Promise.all(items.map(async i => {
+          if (i.Product.isCommented) {
+            const comment = await Comment.findOne({ productId: i.productId }).lean()
+            return {
+              ...i.Product,
+              userComment: comment
+            }
+          } else {
+            return i.Product
+          }
+        }))
         return {
           ...order,
           createdAt: dayjs(order.createdAt).format('YYYY-MM-DD'),
-          items: items.map(i => i.Product)
+          items
         }
       }))
 
@@ -69,15 +82,21 @@ const orderController = {
       const data = await Promise.all(productList.map(async p => {
         const orderInfo = await OrderItem.findOne({
           where: { productId: p.id },
-          include: [Order],
+          include: Order,
           nest: true,
           raw: true
         })
+        // 取得該商品評價
+        let comment = null
+        if (p.isCommented) {
+          comment = await Comment.findOne({ productId: p.id }).lean()
+        }
         return {
           ...p,
           receiverName: orderInfo.Order.receiverName,
           receiverPhone: orderInfo.Order.receiverPhone,
-          receiverAddress: orderInfo.Order.receiverAddress
+          receiverAddress: orderInfo.Order.receiverAddress,
+          userComment: comment
         }
       }))
 

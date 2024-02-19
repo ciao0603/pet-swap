@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs')
 
-const { User } = require('../models')
+const { User, Product } = require('../models')
 const { imgurFileHandler } = require('../helpers/file-helper')
 // 使用者的默認頭像
 const userDefaultImage = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
@@ -48,8 +48,19 @@ const userController = {
     res.redirect('/login')
   },
   // 個人資料頁面
-  getUser: (req, res, next) => {
-    res.render('user')
+  getUser: async (req, res, next) => {
+    try {
+      const { userId } = req.params
+      // 找出user已購買但尚未評價的商品
+      const purchasedProducts = await Product.findAll({
+        where: { buyerUserId: userId, isCommented: false },
+        raw: true
+      })
+
+      res.render('user', { products: purchasedProducts })
+    } catch (err) {
+      next(err)
+    }
   },
   // 資料修改頁面
   userEditPage: (req, res, next) => {

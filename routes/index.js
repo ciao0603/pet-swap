@@ -7,6 +7,7 @@ const productController = require('../controllers/product-controller')
 const searchController = require('../controllers/search-controller')
 const cartController = require('../controllers/cart-controller')
 const orderController = require('../controllers/order-controller')
+const commentController = require('../controllers/comment-controller')
 const passport = require('../config/passport')
 const { errorHandler } = require('../middlewares/error-handler')
 const { userAuthenticated } = require('../middlewares/auth')
@@ -65,6 +66,8 @@ router.get('/products/create', userAuthenticated, productController.productCreat
 router.get('/products/:productId/edit', userAuthenticated, productController.productEditPage)
 // 搜尋商品
 router.get('/products/search', userAuthenticated, searchController.searchProducts)
+// 發布商品評價
+router.post('/products/:productId/comments', userAuthenticated, commentController.postComment)
 // 商品資料
 router.route('/products/:productId')
   .all(userAuthenticated)

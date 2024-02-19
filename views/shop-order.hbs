@@ -32,20 +32,29 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h1 class="modal-title fw-bold fs-3" id="orderItemsLabel">{{this.name}}</h1>
+                  <h3 class="modal-title fw-bold fs-3" id="orderItemsLabel">{{this.name}}</h3>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   {{!-- 寄送資訊 --}}
-                  <h5 class="text-start fw-medium fs-6">寄送資訊</h5>
+                  <h4 class="text-start fw-medium fs-6">寄送資訊</h4>
                   <div class="rounded text-start bg-dark-subtle mb-3 p-2">
                     <p class="mb-1">收件人姓名: <strong>{{this.receiverName}}</strong></p>
                     <p class="mb-1">收件人電話: <strong>{{this.receiverPhone}}</strong></p>
                     <p class="mb-1">收件人地址: <strong>{{this.receiverAddress}}</strong>
                     </p>
                   </div>
+                  {{#if this.userComment}}
+                  <h4 class="text-start fw-medium fs-6">消費者評價</h4>
+                  <div class="d-flex justify-content-start align-items-center rounded bg-warning-subtle mb-3 p-2">
+                    <p class="fw-bold mb-0 bg-warning">{{this.userComment.userName}}</p>
+                    <p class="mx-2 fw-bold mb-0"><i class="fa-solid fa-star"
+                        style="color: #FFD43B;"></i>{{this.userComment.score}}</p>
+                    <p class="mb-0">{{this.userComment.comment}}</p>
+                  </div>
+                  {{/if}}
                   {{!-- 商品資訊 --}}
-                  <h5 class="text-start fw-medium fs-6">商品資訊</h5>
+                  <h4 class="text-start fw-medium fs-6">商品資訊</h4>
                   <hr class="my-2">
                   <div class="d-flex">
                     <div style="max-width: 40%;">
