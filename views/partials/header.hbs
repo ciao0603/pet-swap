@@ -2,9 +2,9 @@
   <nav class="navbar navbar-expand-lg bg-primary" style="background-color: #e3f2fd;">
     <div class="container-fluid row">
       <div class="d-flex col-6">
-        <a class="navbar-brand" href="/" style="text-decoration: none; color: black;">
+        <a class="navbar-brand fw-bold" href="/" style="ont-size: 24px; text-decoration: none; color: black;">
           <i class="fa-solid fa-paw fa-lg" style="color: #ac610c;"></i>
-          <strong style="font-size: 24px;">Pet Swap</strong>
+          Pet Swap
         </a>
         {{#if user}}
         {{!-- 如果user尚未創建商店 --}}
@@ -23,6 +23,14 @@
         <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
           {{#if user}}
           {{!-- 登入後 --}}
+          {{#if user.isAdmin}}
+          {{!-- 管理員帳號 --}}
+          <li class="nav-item">
+            <a class="nav-link fw-bold" href="/admin">Admin 後台</a>
+          </li>
+          <li><a class="nav-link" href="/logout">Logout</a></li>
+          {{else}}
+          {{!-- 普通帳號 --}}
           {{!-- 購物車 --}}
           <li class="nav-item">
             <a class="nav-link" href="/users/{{user.id}}/carts"><i class="fa-solid fa-cart-shopping"></i></a>
@@ -34,24 +42,18 @@
               {{user.name}}
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
-              {{#if user.isAdmin}}
-              {{!-- 管理這帳號 --}}
-              <li><a class="dropdown-item" href="/admin/users">帳號管理</a></li>
-              <li><a class="dropdown-item" href="/admin/shops">商店管理</a></li>
-              <li><a class="dropdown-item" href="/admin/categories">類別管理</a></li>
-              {{else}}
               {{!-- 普通帳號 --}}
               <li><a class="dropdown-item" href="/users/{{user.id}}">個人訊息</a></li>
               {{!-- 若該帳號有成立商店 --}}
               {{#if user.shopId}}<li><a class="dropdown-item" href="/shops/{{user.shopId}}">我的商店</a></li>{{/if}}
               <li><a class="dropdown-item" href="/users/{{user.id}}/orders">歷史訂單</a></li>
-              {{/if}}
               <li>
                 <hr class="dropdown-divider">
               </li>
               <li><a class="dropdown-item" href="/logout">Logout</a></li>
             </ul>
           </li>
+          {{/if}}
           {{else}}
           {{!-- 登入前 --}}
           <li class="nav-item">

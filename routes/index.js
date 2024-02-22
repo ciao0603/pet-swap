@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
+const admin = require('./modules/admin')
 const userController = require('../controllers/user-controller')
 const shopController = require('../controllers/shop-controller')
 const productController = require('../controllers/product-controller')
@@ -10,8 +11,11 @@ const orderController = require('../controllers/order-controller')
 const commentController = require('../controllers/comment-controller')
 const passport = require('../config/passport')
 const { errorHandler } = require('../middlewares/error-handler')
-const { userAuthenticated } = require('../middlewares/auth')
+const { userAuthenticated, adminAuthenticated } = require('../middlewares/auth')
 const upload = require('../middlewares/multer')
+
+// * 後臺管理
+router.use('/admin', adminAuthenticated, admin)
 
 // * 登入系統
 // 註冊
