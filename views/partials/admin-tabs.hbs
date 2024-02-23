@@ -1,0 +1,12 @@
+<h2 class="fw-bold fs-2">後台管理</h2>
+<ul class="nav nav-tabs my-4">
+  <li class="nav-item">
+    <a class="nav-link fw-bold {{#ifEqual route 'users'}}active{{/ifEqual}}" href="/admin/users">使用者</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link fw-bold {{#ifEqual route 'shops'}}active{{/ifEqual}}" href="/admin/shops">商店</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link fw-bold {{#ifEqual route 'categories'}}active{{/ifEqual}}" href="/admin/categories">商品分類</a>
+  </li>
+</ul>

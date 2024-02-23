@@ -1,0 +1,21 @@
+{{> admin-tabs route='users'}}
+<table class="table align-middle table-striped">
+  <thead class="table-primary">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">姓名</th>
+      <th scope="col">郵箱</th>
+      <th scope="col">商店編號</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each users}}
+    <tr>
+      <th scope="row">{{this.id}}</th>
+      <td class="fw-bold">{{this.name}}</td>
+      <td>{{this.email}}</td>
+      <td class="fw-bold text-primary">{{this.shopId}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
