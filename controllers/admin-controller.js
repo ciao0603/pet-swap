@@ -25,10 +25,17 @@ const adminController = {
   },
   getShops: async (req, res, next) => {
     try {
-      let shops = await Shop.findAll({ raw: true })
+      const SHOPS_LIMIT = 10
+      const limit = Number(req.query.limit) || SHOPS_LIMIT
+      const page = Number(req.query.page) || 1
+      const offset = getOffset(limit, page)
+      // 取得商店資訊並分頁
+      const shops = await Shop.findAndCountAll({ limit, offset, raw: true })
+      let shopList = shops.rows
+      const total = shops.count
 
       // 取得每個商店的總商品數
-      shops = await Promise.all(shops.map(async shop => {
+      shopList = await Promise.all(shopList.map(async shop => {
         const productCount = await Product.count({ where: { shopId: shop.id } })
 
         return {
@@ -37,7 +44,7 @@ const adminController = {
         }
       }))
 
-      res.render('admin/shops', { shops })
+      res.render('admin/shops', { shops: shopList, pagination: getPagination(limit, offset, total) })
     } catch (err) {
       next(err)
     }
