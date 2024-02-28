@@ -1,11 +1,24 @@
 const { User, Shop, Product } = require('../models')
+const { getOffset, getPagination } = require('../helpers/pagination-helper')
 
 const adminController = {
   getUsers: async (req, res, next) => {
     try {
-      const users = await User.findAll({ where: { isAdmin: false }, raw: true })
+      const USERS_LIMIT = 10
+      const limit = Number(req.query.limit) || USERS_LIMIT
+      const page = Number(req.query.page) || 1
+      const offset = getOffset(limit, page)
+      // 取得使用者資訊並分頁
+      const users = await User.findAndCountAll({
+        where: { isAdmin: false },
+        limit,
+        offset,
+        raw: true
+      })
+      const userList = users.rows
+      const total = users.count
 
-      res.render('admin/users', { users })
+      res.render('admin/users', { users: userList, pagination: getPagination(limit, offset, total) })
     } catch (err) {
       next(err)
     }
