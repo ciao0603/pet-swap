@@ -67,12 +67,15 @@ const productController = {
         }
       }))
       // * 取得所有未售出商品資料
-      const products = await Product.findAndCountAll({ where: { buyerUserId: null }, raw: true })
+      const products = await Product.findAndCountAll({
+        where: { buyerUserId: null },
+        limit,
+        offset,
+        raw: true
+      })
       // 製作分頁器
       let productList = products.rows
       const total = products.count
-      // 切割資料
-      productList = productList.slice(offset, offset + limit)
       // 修改資料格式
       productList = productList.map(p => ({
         ...p,
