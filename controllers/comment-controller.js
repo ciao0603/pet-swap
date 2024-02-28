@@ -8,6 +8,8 @@ const commentController = {
       const { score, comment } = req.body
       const product = await Product.findByPk(productId, { include: [User], nest: true })
       const data = product.dataValues
+      // 若非買家的帳號不可評價
+      if (req.user.id !== product.buyerUserId) throw new Error('您沒有評價此商品的權限!')
       // 紀錄評價
       await Comment.create({
         productId,

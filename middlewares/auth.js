@@ -1,4 +1,5 @@
 const { isAuthenticated, getUser } = require('../helpers/auth-helper')
+const { Product } = require('../models')
 
 // 普通帳號驗證
 const userAuthenticated = (req, res, next) => {
@@ -23,4 +24,34 @@ const adminAuthenticated = (req, res, next) => {
   }
 }
 
-module.exports = { userAuthenticated, adminAuthenticated }
+// 檢查是否有使用該路由的權限，以免使用者更動到別人的資料
+const checkUserPermission = async (req, res, next) => {
+  try {
+    // '/users/*'，使用者相關路由
+    if (req.params.userId && Number(req.params.userId) !== req.user.id) {
+      req.flash('error_msg', '此帳號無訪問該路由的權限!')
+      res.redirect('back')
+    }
+    // '/shops/*'，商店相關路由
+    if (req.params.shopId && Number(req.params.shopId) !== req.user.shopId) {
+      req.flash('error_msg', '此帳號無訪問該路由的權限!')
+      res.redirect('back')
+    }
+
+    // '/products/*'，商品相關路由
+    if (req.params.productId) {
+      const { productId } = req.params
+      const product = await Product.findByPk(productId)
+      if (product.shopId !== req.user.shopId) {
+        req.flash('error_msg', '此帳號無訪問該路由的權限!')
+        res.redirect('back')
+      }
+    }
+
+    next()
+  } catch (err) {
+    next(err)
+  }
+}
+
+module.exports = { userAuthenticated, adminAuthenticated, checkUserPermission }
