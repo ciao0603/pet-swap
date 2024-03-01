@@ -1,5 +1,6 @@
-const { Product, ProductCategory } = require('../models')
+const { Product, ProductCategory, sequelize } = require('../models')
 const { getOffset, getPagination } = require('../helpers/pagination-helper')
+const { Op } = require('sequelize')
 
 const searchController = {
   searchProducts: async (req, res, next) => {
@@ -9,43 +10,48 @@ const searchController = {
       const page = Number(req.query.page) || 1
       const limit = Number(req.query.limit) || PRODUCTS_LIMIT
       const offset = getOffset(limit, page)
-      let productList = []
-      // * 根據分類尋找商品
+      // 設定搜尋的條件(初始條件: 尚未售出)
+      const whereCondition = { buyerUserId: null }
+
+      if (!(subCategoryId || KEYWORD)) {
+        res.redirect('/products')
+      }
+
+      // * 根據分類設定條件
       if (subCategoryId) {
-        let data = await ProductCategory.findAll({
-          where: { subCategoryId },
-          include: Product,
-          nest: true,
-          raw: true
-        })
-        // 找出尚未售出的商品
-        data = data.filter(p => p.Product.buyerUserId === null)
-        // 整理資料
-        data = data.map(d => d.Product)
-        productList = data
+        // 取得所有屬於該類別的商品id
+        const productCategories = await ProductCategory.findAll({ where: { subCategoryId } })
+        const productIds = productCategories.map(pc => pc.productId)
+        // 加入搜尋條件: id = [productIds]
+        whereCondition.id = { [Op.in]: productIds }
       }
-      // * 根據關鍵字尋找商品
-      if (KEYWORD && KEYWORD.length !== 0) {
+
+      // * 根據關鍵字設定條件
+      if (KEYWORD && KEYWORD.length > 0) {
         const keyword = KEYWORD.toLowerCase()
-        // 取得未售出的商品
-        let data = await Product.findAll({ where: { buyerUserId: null }, raw: true })
-        // 篩選出包含關鍵字的資料
-        data = data.filter(d => d.name.toLowerCase().includes(keyword) || d.description.toLowerCase().includes(keyword))
-        productList = data
-      } else if (KEYWORD) {
-        res.redirect('back')
+        // 加入搜尋條件: 欄位'name'或'description'包含keyword
+        whereCondition[Op.or] = [
+          sequelize.where(sequelize.fn('LOWER', sequelize.col('name')), 'LIKE', `%${keyword}%`),
+          sequelize.where(sequelize.fn('LOWER', sequelize.col('description')), 'LIKE', `%${keyword}%`)
+        ]
       }
-      // * 製作分頁器
-      const total = productList.length
-      // 切割資料
-      productList = productList.slice(offset, offset + limit)
+
+      // * 利用搜尋條件尋找商品並分頁
+      const products = await Product.findAndCountAll({
+        where: whereCondition,
+        limit,
+        offset,
+        raw: true
+      })
+      const productList = products.rows
+      const total = products.count
       // 修改資料格式
-      productList = productList.map(p => ({
+      const formattedProducts = productList.map(p => ({
         ...p,
         description: p.description.substring(0, 15) + '...'
       }))
 
-      res.render('index', { products: productList, pagination: getPagination(limit, page, total) })
+      res.render('index', { products: formattedProducts, pagination: getPagination(limit, page, total) })
     } catch (err) {
       next(err)
     }
