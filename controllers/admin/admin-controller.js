@@ -1,5 +1,5 @@
-const { User, Shop, Product } = require('../models')
-const { getOffset, getPagination } = require('../helpers/pagination-helper')
+const { User, Shop, Product } = require('../../models')
+const { getOffset, getPagination } = require('../../helpers/pagination-helper')
 
 const adminController = {
   getUsers: async (req, res, next) => {

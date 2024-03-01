@@ -1,4 +1,4 @@
-const { Category, SubCategory, ProductCategory } = require('../models')
+const { Category, SubCategory, ProductCategory } = require('../../models')
 
 const categoryController = {
   // 取得主類別及各自的子類別

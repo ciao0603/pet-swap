@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-const adminController = require('../../controllers/admin-controller')
-const categoryController = require('../../controllers/category-controller')
+const adminController = require('../../controllers/admin/admin-controller')
+const categoryController = require('../../controllers/admin/category-controller')
 
 // * 使用者管理
 router.get('/users', adminController.getUsers)
