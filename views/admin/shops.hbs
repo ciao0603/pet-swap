@@ -17,13 +17,13 @@
           data-bs-toggle="modal" data-bs-target="#shop-{{this.id}}-Info">
           查看商店資訊
         </button>
-        <!-- Modal -->
-        <div class="modal fade" id="shop-{{this.id}}-Info" tabindex="-1" aria-labelledby="exampleModalLabel"
+        <!-- Modal: 商店詳情 -->
+        <div class="modal fade" id="shop-{{this.id}}-Info" tabindex="-1" aria-labelledby="shopInfoLabel"
           aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h3 class="modal-title fs-5 fw-bold" id="exampleModalLabel">{{this.name}}</h3>
+                <h2 class="modal-title fs-5 fw-bold" id="shopInfoLabel">{{this.name}}</h2>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="d-flex
@@ -42,5 +42,6 @@
     {{/each}}
   </tbody>
 </table>
+
 {{!-- 分頁器 --}}
 {{>pagination}}

@@ -1,5 +1,5 @@
 <div>
-  <h2 class="fw-bold fs-4 my-2">{{user.name}}的歷史訂單</h2>
+  <h1 class="fw-bold fs-3 my-2">{{user.name}}的歷史訂單</h1>
   {{!-- 歷史訂單列表 --}}
   <table class="table align-middle table-striped">
     <thead class="table-primary">
@@ -17,20 +17,21 @@
         <td>$ {{this.totalPrice}}</td>
         <td>{{this.createdAt}}</td>
         <td>
-          <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#orderItems{{this.id}}">
+          <button type="button" class="btn btn-info" data-bs-toggle="modal"
+            data-bs-target="#orderItemsInfo-{{this.id}}">
             詳情
           </button>
-          {{!-- 訂單詳情 --}}
-          <div class="modal fade" id="orderItems{{this.id}}" tabindex="-1" aria-labelledby="orderItemsLabel"
+          {{!-- modal: 訂單詳情 --}}
+          <div class="modal fade" id="orderItemsInfo-{{this.id}}" tabindex="-1" aria-labelledby="orderItemsLabel"
             aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h3 class="modal-title fs-5" id="orderItemsLabel">訂單編號: {{this.id}}</h3>
+                  <h2 class="modal-title fs-5" id="orderItemsLabel">訂單編號: {{this.id}}</h2>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  {{!-- 商品列表 --}}
+                  {{!-- 該筆訂單的購買商品列表 --}}
                   <div class="mb-3">
                     {{#each this.items}}
                     <div class="border">
@@ -46,8 +47,9 @@
                       {{!-- 評價 --}}
                       {{#if this.userComment}}
                       <div class="d-flex justify-content-start p-1 align-items-center">
-                        <h4 class="fs-6 mb-0">您的評價:</h4>
-                        <p class="mx-2 fw-bold mb-0"><i class="fa-solid fa-star" style="color: #FFD43B;"></i>{{this.userComment.score}}</p>
+                        <h3 class="fs-6 mb-0">您的評價:</h3>
+                        <p class="mx-2 fw-bold mb-0"><i class="fa-solid fa-star"
+                            style="color: #FFD43B;"></i>{{this.userComment.score}}</p>
                         <p class="mb-0">{{this.userComment.comment}}</p>
                       </div>
                       {{/if}}

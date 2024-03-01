@@ -1,24 +1,24 @@
 {{> admin-tabs route='categories'}}
-{{!-- *新增主類別 --}}
+{{!-- ?新增主類別 --}}
 <div class="mb-3">
   <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createCategory">
     + 新增主類別
   </button>
-  {{!-- ?新增主類別的表單 --}}
-  <div class="modal fade" id="createCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  {{!-- modal: 新增主類別的表單 --}}
+  <div class="modal fade" id="createCategory" tabindex="-1" aria-labelledby="createCategoryLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h3 class="modal-title fs-5 fw-bold" id="exampleModalLabel">新增主類別</h3>
+          <h2 class="modal-title fs-5 fw-bold" id="createCategoryLabel">新增主類別</h2>
         </div>
         <form action="/admin/categories" method="POST">
           <div class="modal-body">
-            {{!-- 主類別名稱 --}}
+            {{!-- 輸入主類別名稱 --}}
             <div class="mb-3">
               <label class="form-label my-auto me-2" style="word-break: keep-all;" for="categoryName">主類別名稱</label>
               <input class="form-control" id="categoryName" type="text" name="categoryName" placeholder="Category Name">
             </div>
-            {{!-- 子類別名稱 --}}
+            {{!-- 輸入子類別名稱 --}}
             <div class="mb-3">
               <label class="form-label my-auto me-2" style="word-break: keep-all;" for="subCategoryName">子類別名稱</label>
               <input class="form-control" id="subCategoryName" type="text" name="subCategoryName"
@@ -35,7 +35,7 @@
     </div>
   </div>
 </div>
-{{!-- *類別清單 --}}
+{{!-- ?所有類別清單 --}}
 <table class="table align-middle table-striped">
   <thead class="table-secondary">
     <tr>
@@ -46,22 +46,21 @@
   <tbody>
     {{#each categories}}
     <tr>
-      {{!-- 主類別 --}}
+      {{!-- *主類別 --}}
       <th scope="row">
         <div class="d-flex flex-wrap">
-          <h3 class="fw-bold fs-5 my-auto me-2">{{this.name}}</h3>
+          <h2 class="fw-bold fs-5 my-auto me-2">{{this.name}}</h2>
           <button type="button" class="btn btn-outline-primary btn-sm me-1 my-1" data-bs-toggle="modal"
             data-bs-target="#editCategory-{{this.id}}">編輯</button>
-          {{!-- ?編輯主類別的表單 --}}
-          <div class="modal fade" id="editCategory-{{this.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+          {{!-- modal: 編輯主類別的表單 --}}
+          <div class="modal fade" id="editCategory-{{this.id}}" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <form action="/admin/categories/{{this.id}}?_method=PUT" method="POST">
                   <div class="modal-body">
                     <h3 class="fs-2 fw-bold">{{this.name}}</h3>
                     <br>
-                    {{!-- 主類別名稱 --}}
+                    {{!-- 輸入主類別名稱 --}}
                     <div class="mb-3">
                       <label class="form-label my-auto me-2" style="word-break: keep-all;"
                         for="categoryName">將類別名稱修改為</label>
@@ -77,26 +76,29 @@
               </div>
             </div>
           </div>
-          <form action="/admin/categories/{{this.id}}?_method=DELETE" method="POST"><button type="submit"
-              class="btn btn-outline-danger btn-sm me-1 my-1" onclick="return confirm(`確定要刪除 {{ this.name }} 嗎？
-刪除主類別會同時刪除其相關的子類別`)">刪除</button></form>
+          {{!-- 主類別刪除按鈕 --}}
+          <form action="/admin/categories/{{this.id}}?_method=DELETE" method="POST">
+            <button type="submit" class="btn btn-outline-danger btn-sm me-1 my-1" onclick="return confirm(`確定要刪除 {{ this.name }} 嗎？
+刪除主類別會同時刪除其相關的子類別`)">刪除</button>
+          </form>
+          {{!-- 新增子類別 --}}
           <button type="button" class="btn btn-secondary btn-sm my-1" data-bs-toggle="modal"
             data-bs-target="#createSubCategory-categoryId-{{this.id}}">
             + 新增子類別
           </button>
-          {{!-- ?新增子類別的表單 --}}
+          {{!-- modal: 新增子類別的表單 --}}
           <div class="modal fade" id="createSubCategory-categoryId-{{this.id}}" tabindex="-1"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            aria-labelledby="createSubCategoryLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h3 class="modal-title fs-5 fw-bold" id="exampleModalLabel">新增子類別</h3>
+                  <h3 class="modal-title fs-5 fw-bold" id="createSubCategoryLabel">新增子類別</h3>
                 </div>
                 <form action="/admin/subCategories" method="POST">
                   <div class="modal-body">
-                    {{!-- 所屬主類別 --}}
+                    {{!-- 隱藏回傳所屬主類別 --}}
                     <input type="text" class="visually-hidden" name="categoryId" value={{this.id}}>
-                    {{!-- 子類別名稱 --}}
+                    {{!-- 輸入子類別名稱 --}}
                     <div class="mb-3">
                       <label class="form-label my-auto me-2" style="word-break: keep-all;"
                         for="subCategoryName">子類別名稱</label>
@@ -114,24 +116,24 @@
           </div>
         </div>
       </th>
-      {{!-- 子類別 --}}
+
+      {{!-- *子類別 --}}
       <td>
         <div class="d-flex flex-wrap">
           {{#each this.subCategories}}
           <div class="d-flex m-2">
-            <h4 class="fs-6 me-3 my-auto">◆ {{this.name}}</h4>
+            <h2 class="fs-6 me-3 my-auto">◆ {{this.name}}</h2>
             <button type="button" class="btn btn-outline-primary btn-sm me-1" data-bs-toggle="modal"
               data-bs-target="#editSubCategory-{{this.id}}">編輯</button>
-            {{!-- ?編輯子類別的表單 --}}
-            <div class="modal fade" id="editSubCategory-{{this.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
-              aria-hidden="true">
+            {{!-- modal: 編輯子類別的表單 --}}
+            <div class="modal fade" id="editSubCategory-{{this.id}}" tabindex="-1" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <form action="/admin/subCategories/{{this.id}}?_method=PUT" method="POST">
                     <div class="modal-body">
                       <h3 class="fs-2 fw-bold">{{this.name}}</h3>
                       <br>
-                      {{!-- 子類別名稱 --}}
+                      {{!-- 輸入子類別名稱 --}}
                       <div class="mb-3">
                         <label class="form-label my-auto me-2" style="word-break: keep-all;"
                           for="subCategoryName">將子類別名稱修改為</label>
@@ -147,10 +149,14 @@
                 </div>
               </div>
             </div>
+            {{!-- 子類別刪除按鈕 --}}
             <form action="/admin/subCategories/{{this.id}}?_method=DELETE" method="POST">
+              {{!-- 隱藏回傳所屬主類別 --}}
               <input type="text" class="visually-hidden" name="categoryId" value={{this.categoryId}}>
               <button type="submit" class="btn btn-outline-danger btn-sm me-1" onclick="return confirm(`確定要刪除 {{ this.name }} 嗎？
-*若刪除後主類別底下無其他子類別，也會一同刪除主類別`)">刪除</button>
+*若刪除後主類別底下無其他子類別，也會一同刪除主類別`)">
+                刪除
+              </button>
             </form>
           </div>
           {{/each}}

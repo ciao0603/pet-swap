@@ -1,10 +1,10 @@
-{{!-- 搜尋欄 --}}
+{{!-- ?搜尋欄 --}}
 <div>
   <form class="d-flex" action="/products/search" method="get">
     <input class="form-control" type="search" name="KEYWORD" placeholder="Search">
   </form>
 </div>
-{{!-- 分類表 --}}
+{{!-- ?分類表 --}}
 <div class="my-3 bg-primary-subtle">
   <ul class="nav nav-pills ps-2">
     <div class="fw-bold my-auto">依類別尋找: </div>
@@ -21,7 +21,7 @@
     {{/each}}
   </ul>
 </div>
-{{!-- 商品列表 --}}
+{{!-- ?商品列表 --}}
 <div class="row row-cols-4 align-items-start my-3">
   {{!-- card --}}
   {{#each products}}
@@ -30,7 +30,7 @@
       <a href="/products/{{this.id}}" style="text-decoration: none;">
         <img src="{{this.image}}" class="card-img-top" alt="商品照片">
         <div class="card-body">
-          <h5 class="card-title fw-bold text-dark">{{this.name}}</h5>
+          <h1 class="card-title fs-5 fw-bold text-dark">{{this.name}}</h1>
           <p class="card-text mb-1">{{this.description}}</p>
           <div class="d-flex justify-content-between">
             <p class="card-text fw-bold m-0">{{this.status}}</p>
@@ -42,5 +42,5 @@
   </div>
   {{/each}}
 </div>
-{{!-- 分頁器 --}}
+{{!-- ?分頁器 --}}
 {{>pagination}}
