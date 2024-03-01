@@ -128,7 +128,6 @@ const productController = {
   },
   putProduct: async (req, res, next) => {
     try {
-      console.log('start')
       const { productId } = req.params
       const { name, status, price, description, categoryId } = req.body
       // 更新商品資料

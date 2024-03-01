@@ -11,7 +11,6 @@ const cartController = {
       carts.forEach(item => {
         totalPrice += item.price
       })
-      console.log(totalPrice)
 
       res.render('cart', { carts, totalPrice })
     } catch (err) {
