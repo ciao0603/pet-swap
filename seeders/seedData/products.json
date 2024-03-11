@@ -1,0 +1,310 @@
+[
+  {
+    "name": "犬用主食罐(牛肉)",
+    "SubCategory":["狗", "主食罐"],
+    "image": "https://fly.storage.tigris.dev/pai-images/5c981eadf3e348848320c76862094815.jpeg",
+    "status": "幾乎全新",
+    "description": "這罐牛肉罐頭是您毛孩的美味選擇，品質可靠，無添加任何人工成分，讓您的寵物享受天然美味。",
+    "price": 50,
+    "is_commented": false
+  },
+  {
+    "name": "貓用主食罐(鮪魚)",
+    "SubCategory": [
+      "貓",
+      "主食罐"
+    ],
+    "image": "https://fly.storage.tigris.dev/pai-images/97e74415e3fa4a9fb122dcf13c172663.jpeg",
+    "status": "幾乎全新",
+    "description": "這款鮪魚主食罐是您貓咪的美味選擇，採用高品質鮪魚製成，無添加任何人工色素或防腐劑，為您的寵物提供天然美味的享受。",
+    "price": 55,
+    "is_commented": false
+  },
+  {
+    "name": "雞肉凍乾",
+    "SubCategory": [
+      "狗",
+      "貓",
+      "零食"
+    ],
+    "image": "https://fly.storage.tigris.dev/pai-images/b936a166eac34203a9d87dcde4ade8f5.jpeg",
+    "status": "幾乎全新",
+    "description": "這款雞肉凍乾零食是您寵物的健康零食選擇，採用新鮮雞肉製成，經過凍乾處理保留了原始的營養價值和口感，是寵物愛不釋手的美味小吃。",
+    "price": 200,
+    "is_commented": false
+  },
+  {
+    "name": "貓薄荷",
+    "SubCategory": [
+      "貓",
+      "零食"
+    ],
+    "image": "https://fly.storage.tigris.dev/pai-images/7c13ae39e1824404abd20573c59cf81c.jpeg",
+    "status": "幾乎全新",
+    "description": "這款貓薄荷零食是您貓咪的絕佳選擇，蘊含天然薄荷成分，能刺激貓咪的嗅覺和味覺，提供優質的娛樂和安定情緒。",
+    "price": 100,
+    "is_commented": false
+  },
+  {
+    "name": "貓用薄荷潔牙骨",
+    "SubCategory": [
+      "貓",
+      "潔牙骨"
+    ],
+    "image": "https://fly.storage.tigris.dev/pai-images/13eed9c630004988b21374f9b942b733.jpeg",
+    "status": "幾乎全新",
+    "description": "這款貓用薄荷潔牙骨是您貓咪口腔健康的理想選擇，含有天然薄荷成分，能有效去除牙垢，清潔口腔，同時刺激貓咪的味覺和嗅覺，讓牠享受美味的同時保持口氣清新。",
+    "price": 85,
+    "is_commented": false
+  },
+  {
+    "name": "犬用潔牙棒",
+    "SubCategory": [
+      "狗",
+      "潔牙骨"
+    ],
+    "image": "https://fly.storage.tigris.dev/pai-images/bab9c2e70fe445ecb6dc5f93fd3e3494.jpeg",
+    "status": "幾乎全新",
+    "description": "這款狗狗潔牙棒是您狗狗口腔健康的理想選擇，具有清新口氣和潔淨牙齒的雙重功效。特別設計的形狀和質地可幫助去除牙垢和預防牙結石，同時提供狗狗喜歡的口味，讓牠享受潔牙的樂趣。",
+    "price": 160,
+    "is_commented": false
+  },
+  {
+    "name": "犬用飼料(幼犬)",
+    "SubCategory": [
+      "狗",
+      "飼料"
+    ],
+    "image": "https://fly.storage.tigris.dev/pai-images/e2d75bc44d4c44859fa5abb1c2b9b244.jpeg",
+    "status": "幾乎全新",
+    "description": "這款幼犬飼料是專為您的小狗設計，提供全面均衡的營養，支持幼犬健康成長。含有適量的蛋白質、維生素和礦物質，有助於促進骨骼和肌肉的發育，同時支持免疫系統健康。特別配方易於消化，適合小狗的胃腸系統，是幼犬健康生活的理想選擇。",
+    "price": 499,
+    "is_commented": false
+  },
+  {
+    "name": "犬用飼料(成犬)",
+    "SubCategory": [
+      "狗",
+      "飼料"
+    ],
+    "image": "https://fly.storage.tigris.dev/pai-images/9827642ac3d24ddbb05fb8df0f3a9798.jpeg",
+    "status": "幾乎全新",
+    "description": "這款成犬飼料提供全面均衡的營養，滿足成犬日常所需。富含高質量蛋白質、維生素和礦物質，有助於維持健康的肌肉和免疫系統功能。特別調配的配方可支持成犬的消化系統和心臟健康，讓您的狗狗保持健康活力。",
+    "price": 799,
+    "is_commented": false
+  },
+  {
+    "name": "幼貓專用飼料",
+    "SubCategory": [
+      "貓",
+      "飼料"
+    ],
+    "image": "https://fly.storage.tigris.dev/pai-images/ccc5314d772241f991e3ee07883dd5b0.jpeg",
+    "status": "幾乎全新",
+    "description": "這款幼貓專用飼料是為您的小貓精心調配，提供全面均衡的營養，支持幼貓健康成長。富含高質量的蛋白質、必需脂肪和維生素，有助於促進幼貓的骨骼和肌肉發育，同時支持免疫系統健康。特別配方易於消化，適合幼貓的胃腸系統，是幼貓健康生活的理想選擇。",
+    "price": 1300,
+    "is_commented": false
+  },
+  {
+    "name": "貓咪飼料",
+    "SubCategory": [
+      "貓",
+      "飼料"
+    ],
+    "image": "https://fly.storage.tigris.dev/pai-images/7fb7f1efdd944fa7a31bc1c61971a977.jpeg",
+    "status": "幾乎全新",
+    "description": "這款貓咪飼料提供全面均衡的營養，滿足貓咪日常所需。含有高品質的蛋白質、必需脂肪和維生素，有助於維持健康的肌肉和免疫系統功能。特別調配的配方可支持貓咪的消化系統和心臟健康，讓您的貓咪保持健康活力。",
+    "price": 359,
+    "is_commented": false
+  },
+  {
+    "name": "寵物益生菌",
+    "SubCategory": [
+      "狗",
+      "貓",
+      "保健品"
+    ],
+    "image": "https://fly.storage.tigris.dev/pai-images/e87751c6931644079ea405061266e3a3.jpeg",
+    "status": "幾乎全新",
+    "description": "這款寵物益生菌是專為您的寵物設計，含有有益的益生菌菌株，有助於維持寵物的腸道健康和消化功能。透過補充益生菌，可以幫助平衡腸道菌群，增強免疫系統，預防腸道問題，同時促進營養吸收。為您的寵物提供全面的健康支持，讓牠們擁有更健康快樂的生活",
+    "price": 450,
+    "is_commented": false
+  },
+  {
+    "name": "寵物魚油",
+    "SubCategory": [
+      "狗",
+      "貓",
+      "保健品"
+    ],
+    "image": "https://fly.storage.tigris.dev/pai-images/c120ad93b4ca4fb8b963302c16393164.jpeg",
+    "status": "幾乎全新",
+    "description": "這款寵物魚油是您寵物健康的理想補充品，含有豐富的 Omega-3 脂肪酸，如 EPA 和 DHA，有助於維護皮膚健康和毛髮光澤，同時支持心臟和關節功能。添加魚油到寵物的飲食中，能提供營養補充，幫助維持寵物的整體健康和活力。",
+    "price": 799,
+    "is_commented": false
+  },
+  {
+    "name": "化毛膏",
+    "SubCategory": [
+      "貓",
+      "保健品"
+    ],
+    "image": "https://fly.storage.tigris.dev/pai-images/d1e32eae042d4f8f824534c7f58cb334.jpeg",
+    "status": "幾乎全新",
+    "description": "這款寵物化毛膏是專為您的寵物而設計，能夠溫和有效地去除掉毛球和過多的脫落毛髮，同時促進毛髮的生長和保持皮膚的健康。含有天然成分，無刺激性，適合各種寵物使用，為您的毛孩提供舒適的毛髮護理體驗。",
+    "price": 269,
+    "is_commented": false
+  },
+  {
+    "name": "貓咪豆腐砂",
+    "SubCategory": [
+      "貓",
+      "日常用品"
+    ],
+    "image": "https://fly.storage.tigris.dev/pai-images/9f4f04608379405bb462004b3e0676e8.jpeg",
+    "status": "幾乎全新",
+    "description": "這款豆腐砂是一種天然、環保的貓砂選擇，採用豆腐渣製成，無化學添加劑，安全無害。它吸收效果好，能夠快速凝結尿液，有效控制異味，同時易於清理。給予您的貓咪一個乾淨、舒適的廁所環境，同時對環境友好。",
+    "price": 320,
+    "is_commented": false
+  },
+  {
+    "name": "貓跳台",
+    "SubCategory": [
+      "貓",
+      "日常用品"
+    ],
+    "image": "https://fly.storage.tigris.dev/pai-images/75c4348bf34f45b38f95ba5558a165ce.jpeg",
+    "status": "狀況良好",
+    "description": "這款貓跳台是專為您的貓咪設計的理想遊戲和休息場所。它結合了多個層次和不同高度的平台，讓貓咪可以跳躍、攀爬和休息。許多跳台還配有貓抓板，讓貓咪可以磨爪子。提供了一個安全和有趣的空間，滿足貓咪的天性和運動需求，同時為貓咪提供一個舒適的休息場所。",
+    "price": 1250,
+    "is_commented": false
+  },
+  {
+    "name": "寵物床墊",
+    "SubCategory": [
+      "狗",
+      "貓",
+      "日常用品"
+    ],
+    "image": "https://fly.storage.tigris.dev/pai-images/5e79ff65cb874d30a2b40fbfae3bf15a.jpeg",
+    "status": "狀況尚可",
+    "description": "這款寵物床墊是為您的寵物提供舒適休息的理想選擇。採用高品質的材料製成，提供柔軟的支撐，同時保持舒適和溫暖。床墊設計符合寵物的身體結構，提供良好的支撐，有助於減輕壓力，促進舒適的睡眠。易於清潔和維護，為您的寵物提供健康舒適的睡眠環境。",
+    "price": 600,
+    "is_commented": false
+  },
+  {
+    "name": "寵物指甲剪",
+    "SubCategory": [
+      "狗",
+      "貓",
+      "日常用品"
+    ],
+    "image": "https://fly.storage.tigris.dev/pai-images/7a5acdabadab46469b50f097216c7ece.jpeg",
+    "status": "幾乎全新",
+    "description": "這款寵物安全指甲剪是為了為您的寵物提供安全、方便的美容護理工具。具有專門設計的刀口，可以精準地修剪寵物的指甲，避免剪到血管和神經，從而降低意外傷害的風險。握把設計符合人體工程學，提供舒適的握持感，讓您能夠輕鬆地為您的寵物修剪指甲，保持其健康舒適。",
+    "price": 129,
+    "is_commented": false
+  },
+  {
+    "name": "牽引繩",
+    "SubCategory": [
+      "狗",
+      "貓",
+      "外出用品"
+    ],
+    "image": "https://fly.storage.tigris.dev/pai-images/a9e3f3cc3f7f4b0bb7fd433027881465.jpeg",
+    "status": "狀況良好",
+    "description": "這款牽引繩是一種寵物散步時使用的安全工具，設計為舒適且堅固。具有高品質的材料製成，能夠承受牠們的拉扯。繩子的設計與牠們的體型相符，並且具有足夠的長度，讓您可以輕鬆控制您的寵物，同時讓牠們在戶外活動時保持舒適感。許多牽引繩還附有反光條，提高在夜間散步時的可見度，確保您的寵物的安全。",
+    "price": 99,
+    "is_commented": false
+  },
+  {
+    "name": "外出推車",
+    "SubCategory": [
+      "狗",
+      "貓",
+      "外出用品"
+    ],
+    "image": "https://fly.storage.tigris.dev/pai-images/457410f40133455a87eabf609f0016ce.jpeg",
+    "status": "狀況良好",
+    "description": "這款寵物推車是為您的寵物提供舒適旅行的理想選擇。設計堅固耐用，可容納各種大小的寵物，並提供足夠的空間讓牠們舒適坐躺。推車具有穩定的結構和堅固的輪子，可以輕鬆地在各種地形上移動，如草地、道路或人行道。軟墊和通風窗設計保護您的寵物舒適和安全，同時為您提供方便的旅行方式，讓您與您的寵物一起享受戶外活動。",
+    "price": 2999,
+    "is_commented": false
+  },
+  {
+    "name": "外出背包",
+    "SubCategory": [
+      "狗",
+      "貓",
+      "外出用品"
+    ],
+    "image": "https://th.bing.com/th/id/OIG4.beMrNLHI30JUh_ghjvb5?w=1024&h=1024&rs=1&pid=ImgDetMain",
+    "status": "幾乎全新",
+    "description": "這款寵物外出背包是為了您的寵物提供舒適、安全的旅行方式。背包設計符合人體工程學，能夠分散重量，讓您輕鬆攜帶您的寵物。背包內部有足夠的空間，讓您的寵物舒適坐躺，同時保持通風。許多背包還具有透明的窗戶設計，讓您可以觀察您的寵物，確保牠們的安全。這款背包適用於各種戶外活動，如散步、郊遊或旅行，讓您可以輕鬆與您的寵物一起享受戶外時光。",
+    "price": 679,
+    "is_commented": false
+  },
+  {
+    "name": "撿便袋",
+    "SubCategory": [
+      "狗",
+      "貓",
+      "外出用品"
+    ],
+    "image": "https://th.bing.com/th/id/OIG4.LHtQdvtsnfhXHFmvIIzp?w=1024&h=1024&rs=1&pid=ImgDetMain",
+    "status": "幾乎全新",
+    "description": "撿便袋是為了讓您在您的寵物上廁所時能夠輕鬆清理糞便而設計的工具。這些袋子通常由可降解材料製成，方便且衛生。它們具有足夠的強度來容納糞便，同時能夠有效地封閉，以防止氣味洩漏。撿便袋非常適用於寵物散步時使用，可以輕鬆地將糞便收集起來，同時保持環境整潔。",
+    "price": 50,
+    "is_commented": false
+  },
+  {
+    "name": "寵物沐浴露(狗狗)",
+    "SubCategory": [
+      "狗",
+      "沐浴用品"
+    ],
+    "image": "https://th.bing.com/th/id/OIG1.4nIL1RwGu_RfJy70kAMP?w=1024&h=1024&rs=1&pid=ImgDetMain",
+    "status": "幾乎全新",
+    "description": "這款寵物沐浴露是專為您的狗狗而設計，採用溫和的配方，適合各種皮膚類型。它含有天然成分，如蘆薈和椰子油，能夠溫和地清潔毛髮和皮膚，同時保持皮膚的水分平衡。沐浴露具有淡淡的香味，能夠保持您的狗狗清新的氣味。使用後，您的狗狗的毛髮會變得柔軟光滑，皮膚感覺舒適。",
+    "price": 500,
+    "is_commented": false
+  },
+  {
+    "name": "貓咪專用洗毛精",
+    "SubCategory": [
+      "貓",
+      "沐浴用品"
+    ],
+    "image": "https://th.bing.com/th/id/OIG1.d19zhojXzml6XKGYaazy?w=1024&h=1024&rs=1&pid=ImgDetMain",
+    "status": "幾乎全新",
+    "description": "這款貓咪專用洗毛精是為了溫和清潔您的貓咪而設計的產品。它含有溫和的配方，適合貓咪敏感的皮膚。這種洗毛精通常含有天然成分，如蘆薈和椰子油，能夠溫和地清潔貓咪的毛髮和皮膚，同時保持皮膚的水分平衡。洗毛精具有淡淡的香味，能夠保持您的貓咪清新的氣味。使用後，您的貓咪的毛髮會變得柔軟光滑，皮膚感覺舒適。",
+    "price": 500,
+    "is_commented": false
+  },
+  {
+    "name": "按摩刷",
+    "SubCategory": [
+      "狗",
+      "貓",
+      "沐浴用品"
+    ],
+    "image": "https://th.bing.com/th/id/OIG4.yaZi6jQ3SgAPmAzwgCC0?w=1024&h=1024&rs=1&pid=ImgDetMain",
+    "status": "狀況良好",
+    "description": "寵物按摩刷是一種專為寵物而設計的工具，可幫助促進牠們的血液循環，減輕肌肉疲勞，並提供舒緩的按摩。這種按摩刷通常具有柔軟的刷毛或觸感，適合各種寵物的皮膚，可用於梳理毛髮、去除死皮和鬃毛，同時促進油脂分泌，有助於保持寵物的毛髮健康和光澤。按摩刷還可以加強您與寵物之間的關係，提供親密互動的機會。",
+    "price": 99,
+    "is_commented": false
+  },
+  {
+    "name": "寵物吸水毛巾",
+    "SubCategory": [
+      "狗",
+      "貓",
+      "沐浴用品"
+    ],
+    "image": "https://th.bing.com/th/id/OIG3.8T7kVDSTDc6txNM818wS?w=1024&h=1024&rs=1&pid=ImgDetMain",
+    "status": "幾乎全新",
+    "description": "這款寵物吸水快乾毛巾是為了方便您在寵物洗澡後迅速吸乾水分而設計的產品。它採用高吸水性的材料製成，能夠快速吸收毛髮和皮膚上的水分，減少寵物在濕潤狀態下的不適感。這種毛巾還具有快乾的特性，可以迅速風乾，方便下一次使用。同時，它柔軟舒適，不會刺激寵物的皮膚，是洗澡後方便、有效的毛髮護理工具。",
+    "price": 399,
+    "is_commented": false
+  }
+]
