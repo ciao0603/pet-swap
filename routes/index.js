@@ -24,8 +24,8 @@ router.use('/oauth', oauth)
 // * 登入系統
 // 註冊
 router.route('/register')
-  .get(userController.RegisterPage)
-  .post(userController.Register)
+  .get(userController.registerPage)
+  .post(userController.register)
 // 登入
 router.route('/login')
   .get(userController.loginPage)
