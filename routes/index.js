@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const admin = require('./modules/admin')
+const oauth = require('./modules/oauth')
 const userController = require('../controllers/user-controller')
 const shopController = require('../controllers/shop-controller')
 const productController = require('../controllers/product-controller')
@@ -16,6 +17,9 @@ const upload = require('../middlewares/multer')
 
 // * 後臺管理
 router.use('/admin', adminAuthenticated, admin)
+
+// * 第三方登入
+router.use('/oauth', oauth)
 
 // * 登入系統
 // 註冊

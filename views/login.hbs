@@ -1,6 +1,7 @@
 <div class="mb-4 text-center">
   <h1 class="fs-3 font-weight-normal fw-bold">Login</h1>
 </div>
+{{!-- 本地登入 --}}
 <form class="form-register" action="/login" method="POST" style="width: 100%;">
   <div class="form-row mb-3">
     <input type="text" id="email" name="email" class="form-control" placeholder="Email" required>
@@ -12,3 +13,11 @@
     <button class="btn btn-primary btn-block" type="submit">Login</button>
   </div>
 </form>
+{{!-- google登入 --}}
+<div class="m-3 text-center">
+  <p class=" btn btn-outline-success m-0"><a href="/oauth/google" style="text-decoration: none;"><i class="fa-brands fa-google me-2"></i>Log in with Google</a></p>
+</div>
+{{!-- facebook登入 --}}
+<div class="text-center">
+  <p class="btn btn-outline-success m-0"><a href="/oauth/facebook" style="text-decoration: none;"><i class="fa-brands fa-facebook me-2"></i>Log in with Facebook</a></p>
+</div>
