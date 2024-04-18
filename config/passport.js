@@ -1,7 +1,6 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const GoogleStrategy = require('passport-google-oauth20')
-const FacebookStrategy = require('passport-facebook')
 const bcrypt = require('bcryptjs')
 
 const { User } = require('../models')
@@ -45,30 +44,6 @@ passport.use(new GoogleStrategy({
     const randomPassword = Math.random().toString(36).slice(-8)
     const hash = await bcrypt.hash(randomPassword, 10)
     const newUser = await User.create({ name, email, password: hash, image: picture })
-
-    return cb(null, newUser)
-  } catch (err) {
-    cb(err, false)
-  }
-}))
-
-// * facebook登入
-passport.use(new FacebookStrategy({
-  clientID: process.env.FACEBOOK_APP_ID,
-  clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: process.env.FACEBOOK_APP_CALLBACK,
-  profileFields: ['email', 'displayName', 'photos']
-}, async (accessToken, refreshToken, profile, cb) => {
-  try {
-    const { name, email, picture } = profile._json
-    const image = picture.data.url
-    const user = await User.findOne({ where: { email } })
-    // 已註冊過就直接登入
-    if (user) return cb(null, user)
-    // 未註冊則產生隨機密碼後 create
-    const randomPassword = Math.random().toString(36).slice(-8)
-    const hash = await bcrypt.hash(randomPassword, 10)
-    const newUser = await User.create({ name, email, password: hash, image })
 
     return cb(null, newUser)
   } catch (err) {

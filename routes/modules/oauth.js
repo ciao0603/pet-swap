@@ -11,12 +11,4 @@ router.get('/google/callback', passport.authenticate('google', {
   failureRedirect: '/login'
 }))
 
-// facebook登入
-router.get('/facebook', passport.authenticate('facebook'))
-
-router.get('/facebook/callback', passport.authenticate('facebook', {
-  successRedirect: '/products',
-  failureRedirect: '/login'
-}))
-
 module.exports = router
