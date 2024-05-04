@@ -1,7 +1,8 @@
 # Pet Swap 寵物用品二手交易平台 (全端專案)
 
-獨立開發專案，協助寵物飼主進行寵物二手用品的買賣。
+獨立開發專案，協助寵物飼主進行寵物二手用品的買賣。  
 以 Node.js + Express 框架進行開發，採用 MySQL + MongoDB 雙資料庫的設計，並利用 Render 和 AWS RDS 進行佈署。
+#### [專案網址](https://pet-swap.onrender.com)   [專案紀錄blog](https://medium.com/@jocelyn94032.0/%E7%95%A2%E6%A5%AD%E4%BA%86-%E7%84%B6%E5%BE%8C%E5%91%A2-8c7ffd91f35b)
 
 ## 目錄
 
