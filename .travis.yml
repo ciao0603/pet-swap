@@ -20,4 +20,5 @@ before_script:
   - sequelize db:migrate
 
 script:
+  - mocha --colors
   - npm run test
