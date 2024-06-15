@@ -21,3 +21,9 @@ before_script:
 
 script:
   - npm run test
+
+deploy:
+  provider: render
+  name: pet-swap
+  access_token: ${RENDER_API_KEY}
+  branch: main
