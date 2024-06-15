@@ -7,7 +7,7 @@
     "start": "cross-env NODE_ENV=development node app.js",
     "dev": "cross-env NODE_ENV=development nodemon app.js",
     "lint": "eslint \"**/*.js\" --fix",
-    "test": "mocha tests --exit --recursive --timeout 50000",
+    "test": "mocha tests --exit --recursive --timeout 50000 --colors",
     "migrate": "npx sequelize db:migrate",
     "seed": "npx sequelize db:seed:all && node seeders/mongo_seeders/commentSeeder.js"
   },

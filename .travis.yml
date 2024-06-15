@@ -9,6 +9,7 @@ services:
 
 env:
   - NODE_ENV=travis
+  - MONGODB_URI=mongodb://travis:password@localhost:27017/pet_swap_test
 
 before_install:
   - mongo pet_swap_test --eval 'db.createUser({user:"travis",pwd:"password",roles:["readWrite"]});'
@@ -20,5 +21,4 @@ before_script:
   - sequelize db:migrate
 
 script:
-  - mocha --colors
   - npm run test
