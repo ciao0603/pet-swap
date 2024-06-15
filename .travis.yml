@@ -11,8 +11,10 @@ env:
   - NODE_ENV=travis
 
 before_install:
+  - mongo pet_swap_test --eval 'db.createUser({user:"travis",pwd:"",roles:["readWrite"]});'
   - mysql -e 'CREATE DATABASE IF NOT EXISTS pet_swap_test default character set utf8mb4 collate utf8mb4_unicode_ci;'
   - npm install sequelize-cli -g
+  - npm install mocha -g
 
 before_script:
   - sequelize db:migrate
