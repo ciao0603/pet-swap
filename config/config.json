@@ -16,5 +16,12 @@
   },
   "production": {
     "use_env_variable": "PROD_DATABASE_URL"
+  },
+  "travis": {
+    "username": "travis",
+    "database": "pet_swap_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "logging": false
   }
 }

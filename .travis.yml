@@ -1,0 +1,10 @@
+language: node_js
+
+node_js:
+    - "18"
+
+env:
+  - NODE_ENV=travis
+
+script:
+  - npm run test
