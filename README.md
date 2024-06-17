@@ -1,4 +1,5 @@
 # Pet Swap 寵物用品二手交易平台 (全端專案)
+[![Build Status](https://app.travis-ci.com/ciao0603/pet-swap.svg?token=AXb5iHNAu9cajZLyAQwy&branch=main)](https://travis-ci.com/ciao0603/pet-swap)
 
 獨立開發專案，協助寵物飼主進行寵物二手用品的買賣。  
 以 Node.js + Express 框架進行開發，採用 MySQL + MongoDB 雙資料庫的設計，並利用 Render 和 AWS RDS 進行佈署。
