@@ -31,7 +31,6 @@ describe('# shop 相關路由', () => {
     fakeImage = sinon.stub(fileHelper, 'imgurFileHandler').resolves('http://fake.com/fakeImage.jpg')
   })
 
-  // GET /shops/create
   describe('# GET /shops/create', () => {
     it('可以瀏覽建立商店的頁面', async () => {
       await agent
@@ -40,7 +39,6 @@ describe('# shop 相關路由', () => {
     })
   })
 
-  // POST /shops
   describe('# POST /shops', () => {
     it('可以建立商店', async () => {
       await agent
@@ -56,7 +54,6 @@ describe('# shop 相關路由', () => {
     })
   })
 
-  // GET /shops/1
   describe('# GET /shops/1', () => {
 
     before(async () => {
@@ -80,7 +77,6 @@ describe('# shop 相關路由', () => {
     })
   })
 
-  // GET /shops/1/edit
   describe('# GET /shops/1/edit', () => {
     it('可以瀏覽編輯商店的頁面', async () => {
       const res = await agent
@@ -90,7 +86,6 @@ describe('# shop 相關路由', () => {
     })
   })
 
-  // PUT /shops/1
   describe('# PUT /shops/1', () => {
     it('可以編輯商店資料', async () => {
       await agent
@@ -103,7 +98,6 @@ describe('# shop 相關路由', () => {
     })
   })
 
-  // GET /shops/1/orders
   describe('# GET /shops/1/orders', () => {
 
     before(async () => {
