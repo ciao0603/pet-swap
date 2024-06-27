@@ -1,5 +1,5 @@
 const { Shop, Product, Category, SubCategory, ProductCategory, Cart } = require('../models')
-const { imgurFileHandler } = require('../helpers/file-helper')
+const fileHelper = require('../helpers/file-helper')
 const { getOffset, getPagination } = require('../helpers/pagination-helper')
 
 const productService = {
@@ -113,8 +113,7 @@ const productService = {
       let image = req.file
 
       if (!(name && image && status && price && description)) throw new Error('尚有欄位未填!')
-      image = await imgurFileHandler(image)
-
+      image = await fileHelper.imgurFileHandler(image)
       // 新增商品
       const product = await Product.create({
         name, image, status, description, price, shopId
@@ -141,7 +140,7 @@ const productService = {
 
       // 更新商品資料
       const product = await Product.findByPk(productId)
-      const image = req.file ? await imgurFileHandler(req.file) : product.image
+      const image = req.file ? await fileHelper.imgurFileHandler(req.file) : product.image
       await product.update({ name, image, status, price, description })
       // 刪除原本的商品分類後重新新增
       await ProductCategory.destroy({ where: { productId } })
