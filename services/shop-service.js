@@ -1,5 +1,5 @@
 const { User, Shop, Product } = require('../models')
-const { imgurFileHandler } = require('../helpers/file-helper')
+const fileHelper = require('../helpers/file-helper')
 
 const shopService = {
   // 渲染編輯商店的頁面
@@ -21,7 +21,8 @@ const shopService = {
       let image = req.file
 
       if (!(name && introduction && image)) throw new Error('所有欄位及頭像皆為必填!')
-      image = await imgurFileHandler(image)
+
+      image = await fileHelper.imgurFileHandler(image)
 
       // 確認資料後建立商店
       const shop = await Shop.create({
@@ -66,7 +67,7 @@ const shopService = {
 
       const shop = await Shop.findByPk(shopId)
       // 若有上傳新的圖片就交給imgFileHandler處理，否則就使用shop原本的圖片
-      const image = req.file ? await imgurFileHandler(req.file) : shop.image
+      const image = req.file ? await fileHelper.imgurFileHandler(req.file) : shop.image
       // 更新資料
       await shop.update({ name, introduction, image })
 

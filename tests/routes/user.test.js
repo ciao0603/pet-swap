@@ -25,7 +25,7 @@ describe('# user 相關路由', () => {
 
   let agent = request.agent(app)
 
-  before(async() => {
+  before(async () => {
     // 確認資料庫淨空
     await db.sequelize.sync({ force: true })
   })
@@ -42,37 +42,41 @@ describe('# user 相關路由', () => {
       await agent.post('/login').send('email=user1@example.com&password=password')
     })
 
-    // GET /users/1
-    it('可以瀏覽個人資料頁面', async () => {
-      const res = await agent
-        .get('/users/1')
-        .expect(200)
-      res.text.should.include('user1')
-      res.text.should.include('product1')
+    describe('# GET /users/1', () => {
+      it('可以瀏覽個人資料頁面', async () => {
+        const res = await agent
+          .get('/users/1')
+          .expect(200)
+        res.text.should.include('user1')
+        res.text.should.include('product1')
+      })
+      it('不可以瀏覽別人的資料頁面', async () => {
+        await agent
+          .get('/users/2')
+          .expect(302)
+          .expect('Location', '/')
+      })
     })
-    // GET /users/2
-    it('不可以瀏覽別人的資料頁面', async () => {
-      await agent
-        .get('/users/2')
-        .expect(302)
-        .expect('Location', '/')
-    })
-    // GET /users/1/edit
-    it('可以瀏覽資料編輯頁面', async () => {
-      const res = await agent
-        .get('/users/1/edit')
-        .expect(200)
-    })
-    // GET /users/1/edit
-    it('資料編輯成功', async () => {
-      await agent
-        .put('/users/1')
-        .send("name=user111&email=&password=&passwordCheck=")
-        .expect(302)
-        .expect('Location', '/users/1')
 
-      const user = await db.User.findByPk(1)
-      user.name.should.equal('user111')
+    describe('# GET /users/1/edit', () => {
+      it('可以瀏覽資料編輯頁面', async () => {
+        await agent
+          .get('/users/1/edit')
+          .expect(200)
+      })
+    })
+
+    describe('# PUT /users/1', () => {
+      it('資料編輯成功', async () => {
+        await agent
+          .put('/users/1')
+          .send("name=user111&email=&password=&passwordCheck=")
+          .expect(302)
+          .expect('Location', '/users/1')
+
+        const user = await db.User.findByPk(1)
+        user.name.should.equal('user111')
+      })
     })
 
     after(async () => {
@@ -102,32 +106,37 @@ describe('# user 相關路由', () => {
       await agent.post('/login').send('email=user1@example.com&password=password')
     })
 
-    // GET /users/1/carts
-    it('瀏覽購物車頁面', async () => {
-      const res = await agent
-        .get('/users/1/carts')
-        .expect(200)
-      res.text.should.include('user1的購物車')
-      res.text.should.include('商品共計100元')
+    describe('GET /users/1/carts', () => {
+      it('瀏覽購物車頁面', async () => {
+        const res = await agent
+          .get('/users/1/carts')
+          .expect(200)
+        res.text.should.include('user1的購物車')
+        res.text.should.include('商品共計100元')
+      })
     })
-    // POST /users/1/carts
-    it('將商品加入購物車', async () => {
-      await agent
-        .post('/users/1/carts')
-        .send('productId=3')
-        .expect(302)
-        .expect('Location', '/')
-      const cart = await db.Cart.findOne({ where: { userId: 1, productId: 3 } })
-      expect(cart).to.exist
+
+    describe('POST /users/1/carts', () => {
+      it('將商品加入購物車', async () => {
+        await agent
+          .post('/users/1/carts')
+          .send('productId=3')
+          .expect(302)
+          .expect('Location', '/')
+        const cart = await db.Cart.findOne({ where: { userId: 1, productId: 3 } })
+        expect(cart).to.exist
+      })
     })
-    // DELETE /users/1/carts/1
-    it('刪除購物車中的商品', async () => {
-      await agent
-        .delete('/users/1/carts/1')
-        .expect(302)
-        .expect('Location', '/')
-      const cart = await db.Cart.findOne({ where: { userId: 1, productId: 1 } })
-      expect(cart).to.not.exist
+
+    describe('DELETE /users/1/carts/1', () => {
+      it('刪除購物車中的商品', async () => {
+        await agent
+          .delete('/users/1/carts/1')
+          .expect(302)
+          .expect('Location', '/')
+        const cart = await db.Cart.findOne({ where: { userId: 1, productId: 1 } })
+        expect(cart).to.not.exist
+      })
     })
 
     after(async () => {
@@ -154,31 +163,33 @@ describe('# user 相關路由', () => {
       await agent.post('/login').send('email=user1@example.com&password=password')
     })
 
-    // POST /users/1/orders
-    it('建立訂單', async () => {
-      await agent
-        .post('/users/1/orders')
-        .send("receiverName= &receiverPhone= &receiverAddress= &productId%5B%5D=1&productId%5B%5D=2&totalPrice=100")
-        .expect(302)
-        .expect('Location', '/products')
-      const order = await db.Order.findOne({ where: { totalPrice: 100 } })
-      const orderItems = await db.OrderItem.findAll({ where: { orderId: order.id } })
-      const product = await db.Product.findByPk(1)
-      const cart = await db.Cart.findOne({ where: { userId: 1, productId: 1 } })
-      expect(order).to.exist
-      expect(orderItems.length).to.be.equal(2)
-      expect(product.buyerUserId).to.be.equal(1)
-      expect(cart).to.not.exist
-    })
-    // GET /users/1/orders
-    it('瀏覽歷史訂單', async () => {
-      const res = await agent
-        .get('/users/1/orders')
-        .expect(200)
-      const order = await db.Order.findOne({ where: { userId: 1 } })
-      res.text.should.include(`訂單編號: ${order.id}`)
+    describe('POST /users/1/orders', () => {
+      it('建立訂單', async () => {
+        await agent
+          .post('/users/1/orders')
+          .send("receiverName= &receiverPhone= &receiverAddress= &productId%5B%5D=1&productId%5B%5D=2&totalPrice=100")
+          .expect(302)
+          .expect('Location', '/products')
+        const order = await db.Order.findOne({ where: { totalPrice: 100 } })
+        const orderItems = await db.OrderItem.findAll({ where: { orderId: order.id } })
+        const product = await db.Product.findByPk(1)
+        const cart = await db.Cart.findOne({ where: { userId: 1, productId: 1 } })
+        expect(order).to.exist
+        expect(orderItems.length).to.be.equal(2)
+        expect(product.buyerUserId).to.be.equal(1)
+        expect(cart).to.not.exist
+      })
     })
 
+    describe('GET /users/1/orders', () => {
+      it('瀏覽歷史訂單', async () => {
+        const res = await agent
+          .get('/users/1/orders')
+          .expect(200)
+        const order = await db.Order.findOne({ where: { userId: 1 } })
+        res.text.should.include(`訂單編號: ${order.id}`)
+      })
+    })
 
     after(async () => {
       // 清空資料庫
