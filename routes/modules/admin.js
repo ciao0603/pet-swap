@@ -17,9 +17,9 @@ router.post('/categories', categoryController.createCategory)
 router.route('/categories/:categoryId')
   .put(categoryController.editCategory)
   .delete(categoryController.deleteCategory)
-// 新增主類別
+// 新增子類別
 router.post('/subCategories', categoryController.createSubCategory)
-// 編輯 & 刪除主類別
+// 編輯 & 刪除子類別
 router.route('/subCategories/:subCategoryId')
   .put(categoryController.editSubCategory)
   .delete(categoryController.deleteSubCategory)
