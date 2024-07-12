@@ -2,15 +2,17 @@
 [![Build Status](https://app.travis-ci.com/ciao0603/pet-swap.svg?token=AXb5iHNAu9cajZLyAQwy&branch=main)](https://travis-ci.com/ciao0603/pet-swap)
 
 獨立開發專案，協助寵物飼主進行寵物二手用品的買賣。  
-以 Node.js + Express 框架進行開發，採用 MySQL + MongoDB 雙資料庫的設計，並利用 Render 和 AWS RDS 進行佈署。
-#### [專案網址](https://pet-swap.onrender.com)   [專案紀錄blog](https://medium.com/@jocelyn94032.0/%E7%95%A2%E6%A5%AD%E4%BA%86-%E7%84%B6%E5%BE%8C%E5%91%A2-8c7ffd91f35b)
-
+- 以 **Node.js + Express** 框架進行開發
+- 採用雙資料庫進行儲存: **AWS RDS(MySQL) + MongoDB**
+- 利用 **Travis CI** 測試並自動佈署至 **Render**
+#### [專案紀錄blog](https://medium.com/@jocelyn94032.0/%E7%95%A2%E6%A5%AD%E4%BA%86-%E7%84%B6%E5%BE%8C%E5%91%A2-8c7ffd91f35b)
+#### [專案網址](https://pet-swap.onrender.com) (專案開啟可能須等待1分鐘，可使用下面提供的測試帳號直接登入)
 ## 目錄
 
 - [功能](#功能)
 - [環境](#環境)
 - [安裝](#安裝)
-- [測試帳號](#測試帳號)
+- [網站測試帳號](#網站測試帳號)
 
 ## 功能
 
@@ -22,7 +24,7 @@
 
 - **賣家中心：** 賣家可提交商店申請、管理商品和商店資訊，並查看已售商品及相關評價。
 
-- **購物車系統：** 買家可隨時查看、刪除購物車中的商品紀錄，可留下收件信息並進行結帳，系統將自動清理已售出商品。
+- **購物車系統：** 買家可隨時查看、刪除購物車中的商品; 可進行結帳，系統將自動清理已售出商品。
 
 - **後台管理：** 僅限擁有管理員權限的帳號，可查看使用者和商店清單，並進行商品類別的管理。
 
@@ -47,6 +49,7 @@ npm i
 ```
 PORT=3000
 MONGODB_URI=YOUR_MONGODB_URI
+MONGODB_URI_TEST=YOUR_MONGODB_URI_TEST
 SESSION_SECRET=secret
 IMGUR_CLIENT_ID=YOUR_IMGUR_CLIENT_ID
 // 第三方登入設定(需至相關平台申請)
@@ -88,8 +91,12 @@ App is running on localhost:3000
 ```
 ctrl+C
 ```
+11. 測試專案:
+```
+npm run test
+```
 
-## 測試帳號
+## 網站測試帳號
 可使用以下三個帳號進行各種身分的測試
 - 管理者
   帳號: root@example.com  
