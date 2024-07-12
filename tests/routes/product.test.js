@@ -5,6 +5,7 @@ const request = require('supertest')
 const bcrypt = require('bcryptjs')
 const sinon = require('sinon')
 const mongoose = require('mongoose')
+const uri = process.env.NODE_ENV ? process.env.MONGODB_URI : process.env.MONGODB_URI_TEST
 
 const app = require('../../app')
 const db = require('../../models')
@@ -30,7 +31,7 @@ const fileHelper = require('../../helpers/file-helper')
 describe('# product 相關路由', () => {
 
   before(async () => {
-    mongoose.connect(process.env.MONGODB_URI_TEST)
+    mongoose.connect(uri)
     await db.sequelize.sync({ force: true })
   })
 

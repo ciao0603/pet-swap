@@ -1,19 +1,17 @@
 const mongoose = require('mongoose')
 require('dotenv').config()
 
-const uri = process.env.NODE_ENV === 'test' ? process.env.MONGODB_URI_TEST : process.env.MONGODB_URI
+const uri = process.env.NODE_ENV ? process.env.MONGODB_URI : process.env.MONGODB_URI_TEST
 
 mongoose.connect(uri)
 const db = mongoose.connection
 
-if (process.env.NODE_ENV !== 'test') {
-  db.on('error', () => {
-    console.log('MongoDB connect error !')
-  })
+db.on('error', err => {
+  console.log('MongoDB connect error !', err)
+})
 
-  db.once('open', () => {
-    console.log('MongoDB connected !')
-  })
-}
+db.once('open', () => {
+  console.log('MongoDB connected !')
+})
 
 module.exports = db
