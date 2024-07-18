@@ -19,7 +19,10 @@ module.exports = (sequelize, DataTypes) => {
     receiverName: DataTypes.STRING,
     receiverPhone: DataTypes.STRING,
     receiverAddress: DataTypes.STRING,
-    totalPrice: DataTypes.INTEGER
+    totalPrice: DataTypes.INTEGER,
+    status: DataTypes.STRING,
+    tradeNo: DataTypes.STRING,
+    productIds: DataTypes.JSON
   }, {
     sequelize,
     modelName: 'Order',

@@ -3,6 +3,7 @@ const router = express.Router()
 
 const admin = require('./modules/admin')
 const oauth = require('./modules/oauth')
+const Ecpay = require('./modules/Ecpay')
 const userController = require('../controllers/user-controller')
 const shopController = require('../controllers/shop-controller')
 const productController = require('../controllers/product-controller')
@@ -20,6 +21,8 @@ router.use('/admin', adminAuthenticated, admin)
 
 // * 第三方登入
 router.use('/oauth', oauth)
+// * 第三方支付
+router.use('/Ecpay', Ecpay)
 
 // * 登入系統
 // 註冊
