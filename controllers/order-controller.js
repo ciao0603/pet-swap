@@ -5,8 +5,7 @@ const orderController = {
   postOrder: (req, res, next) => {
     orderService.postOrder(req, (err, data) => {
       if (err) return next(err)
-      req.flash('success_msg', '下單成功!')
-      res.redirect('/products')
+      res.redirect(`/ecpay/pay/${data.orderId}`)
     })
   },
   // 取得特定使用者的歷史訂單

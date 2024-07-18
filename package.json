@@ -20,6 +20,7 @@
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.10",
     "dotenv": "^16.4.1",
+    "ecpay_aio_nodejs": "^1.2.2",
     "eslint": "^8.56.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.29.1",

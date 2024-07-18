@@ -12,22 +12,42 @@ const orderService = {
       const { receiverName, receiverPhone, receiverAddress, productId, totalPrice } = req.body
 
       if (!(receiverName && receiverPhone && receiverAddress)) throw new Error('請填寫完整寄送資訊!')
+
       // 建立訂單
-      const order = await Order.create({ userId, receiverName, receiverPhone, receiverAddress, totalPrice })
-      // 紀錄訂單詳情
       const productIdArray = Array.isArray(productId) ? productId : [productId]
+      const order = await Order.create({ userId, receiverName, receiverPhone, receiverAddress, totalPrice, status: 'unpaid', productIds: productIdArray })
+      // 刪除 user 購物車紀錄
       await Promise.all(productIdArray.map(async pid => {
-        await OrderItem.create({ orderId: order.id, productId: pid })
-        // 將商品紀錄為已售出
-        const product = await Product.findByPk(pid)
-        await product.update({ buyerUserId: userId })
-        // 刪除購物車紀錄
-        await Cart.destroy({ where: { productId: pid } })
+        await Cart.destroy({ where: { productId: pid, userId } })
       }))
 
-      cb(null)
+      cb(null, { orderId: order.id })
     } catch (err) {
       cb(err)
+    }
+  },
+  updateOrderStatus: async (orderId, status, next) => {
+    try {
+      console.log(`開始更新status，orderId:${orderId}, status: ${status}`)
+      const order = await Order.findByPk(orderId)
+      const orderValue = order.dataValues
+      console.log('更新前order:', orderValue)
+      const { productIds } = orderValue
+      console.log('productIds:', productIds)
+      // 紀錄訂單詳情
+      await Promise.all(productIds.map(async pid => {
+        await OrderItem.create({ orderId: orderValue.id, productId: pid })
+        // 將商品紀錄為已售出
+        const product = await Product.findByPk(pid)
+        await product.update({ buyerUserId: orderValue.userId })
+        // 刪除相關購物車紀錄
+        await Cart.destroy({ where: { productId: pid } })
+      }))
+      // 更新付款狀態
+      await order.update({ status })
+      console.log('更新後order:', order.dataValues)
+    } catch (err) {
+      next(err)
     }
   },
   // 取得特定使用者的歷史訂單
