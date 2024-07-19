@@ -43,7 +43,8 @@ const EcpayController = {
         TotalAmount: `${order.dataValues.totalPrice}`,
         TradeDesc: '寵物二手用品交易',
         ItemName: 'Pet Swap',
-        ReturnURL: `${HOST}/ecpay/return`
+        ReturnURL: `${HOST}/ecpay/return`,
+        ClientBackURL: `${HOST}/products`
       }
 
       const create = new EcpayPayment(options)
@@ -57,8 +58,8 @@ const EcpayController = {
   paymentReturn: async (req, res, next) => {
     try {
       console.log('綠界回傳:', req.body)
-      const { MerchantTradeNo, RtnCode, CheckMacValue } = req.body
-      const data = { MerchantTradeNo, RtnCode }
+      const { MerchantTradeNo, ...data } = req.body
+      const { CheckMacValue, RtnCode } = data
       const order = await Order.findOne({ where: { tradeNo: MerchantTradeNo }, raw: true })
       console.log('交易後order:', order)
 
@@ -75,15 +76,16 @@ const EcpayController = {
         if (RtnCode === '1') {
           await orderService.updateOrderStatus(order.id, 'paid')
           console.log(`訂單 ${order.id} 支付成功`)
+          res.send('1|OK')// 告知綠界已成功接收回傳結果
+        } else {
+          await orderService.updateOrderStatus(order.id, 'failed')
+          console.log(`訂單 ${order.id} 支付失敗，RtnCode 不為 1`)
         }
       } else {
         await orderService.updateOrderStatus(order.id, 'failed')
         console.log(`訂單 ${order.id} 支付失敗，CheckMacValue 不匹配`)
       }
-      // 告知綠界已成功接收回傳結果
-      res.send('1|OK')
-      console.log('結束，路由重新導向~~')
-      res.redirect('/products')
+      console.log('結束')
     } catch (err) {
       next(err)
     }
