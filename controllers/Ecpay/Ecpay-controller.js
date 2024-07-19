@@ -58,14 +58,17 @@ const EcpayController = {
   paymentReturn: async (req, res, next) => {
     try {
       console.log('綠界回傳:', req.body)
-      const { MerchantTradeNo, ...data } = req.body
-      const { CheckMacValue, RtnCode } = data
+      const { MerchantTradeNo, CheckMacValue, RtnCode } = req.body
+      const data = { ...req.body }
+      delete data.CheckMacValue
+
       const order = await Order.findOne({ where: { tradeNo: MerchantTradeNo }, raw: true })
       console.log('交易後order:', order)
 
       if (!order) throw new Error('查無訂單，請重新結帳!')
 
       const create = new EcpayPayment(options)
+      console.log('生成checkValue')
       const checkValue = create.payment_client.helper.gen_chk_mac_value(data)
       console.log(`核對回傳值,CheckMacValue= ${CheckMacValue}, checkValue = ${checkValue}`)
 
