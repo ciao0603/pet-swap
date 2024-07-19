@@ -34,13 +34,13 @@ const EcpayController = {
         hour12: false,
         timeZone: 'UTC'
       })
-      const TradeNo = 'test' + new Date().getTime()
+      const TradeNo = 'test000' + new Date().getTime()
       await order.update({ tradeNo: TradeNo })
 
       const baseParam = {
         MerchantTradeNo: TradeNo,
         MerchantTradeDate,
-        TotalAmount: order.dataValues.totalPrice,
+        TotalAmount: `${order.dataValues.totalPrice}`,
         TradeDesc: '寵物二手用品交易',
         ItemName: 'Pet Swap',
         ReturnURL: `${HOST}/ecpay/return`
