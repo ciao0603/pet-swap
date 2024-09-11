@@ -2,9 +2,10 @@
 [![Build Status](https://app.travis-ci.com/ciao0603/pet-swap.svg?token=AXb5iHNAu9cajZLyAQwy&branch=main)](https://travis-ci.com/ciao0603/pet-swap)
 
 獨立開發專案，協助寵物飼主進行寵物二手用品的買賣。  
-- 以 **Node.js + Express** 框架進行開發
-- 採用雙資料庫進行儲存: **AWS RDS(MySQL) + MongoDB**
-- 利用 **Travis CI** 測試並自動佈署至 **Render**
+- 使用 **Node.js + Express.js**，並以 MVC 架構進行開發
+- 使用雙資料庫進行儲存: **AWS RDS(MySQL) + MongoDB**
+- 使用 **Travis CI** 單元測試並自動佈署至 **Render**
+- 串接金流 - 使用 **綠界科技SDK** 進行第三方支付
 #### [專案紀錄blog](https://medium.com/@jocelyn94032.0/%E7%95%A2%E6%A5%AD%E4%BA%86-%E7%84%B6%E5%BE%8C%E5%91%A2-8c7ffd91f35b)
 #### [專案網址](https://pet-swap.onrender.com) (專案開啟可能須等待1分鐘，可使用下面提供的測試帳號直接登入)
 ## 目錄
@@ -56,6 +57,11 @@ IMGUR_CLIENT_ID=YOUR_IMGUR_CLIENT_ID
 GOOGLE_CLIENT_ID=YOUR_GOOGLE_CLIENT_ID
 GOOGLE_CLIENT_SECRET=YOUR_GOOGLE_CLIENT_SECRET
 GOOGLE_CLIENT_CALLBACK=YOUR_GOOGLE_CLIENT_CALLBACK
+// 綠界金流(需至相關平台申請)
+MERCHANTID=YOUR_ECPAY_MERCHANTID
+HASHKEY=YOUR_ECPAY_HASHKEY
+HASHIV=YOUR_ECPAY_HASHIV
+HOST=佈署平台網址
 ```
 5. 設定資料庫 (或根據個人需求調整):
 ```
